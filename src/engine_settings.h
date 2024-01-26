@@ -1,0 +1,1 @@
+const int K_TARGET_FRAMERATE = 30;

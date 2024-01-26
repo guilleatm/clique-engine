@@ -5,7 +5,14 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
+#include "engine_settings.h"
+
 #include <iostream>
+
+
+#include "ui_window.h"
+
+const float K_TARGET_DELTA_TIME = 1000.0f / K_TARGET_FRAMERATE;
 
 int main(int argc, char* argv[])
 {
@@ -81,10 +88,26 @@ int main(int argc, char* argv[])
 	ImGui_ImplSDLRenderer2_Init(renderer_ptr);
 
 
+	UIWindow w = UIWindow("My UI Window");
+
+
 	bool run = true;
+
+	uint32_t last_frame_ticks;
 
 	while (run)
 	{
+		uint32_t this_frame_ticks = SDL_GetTicks();
+		float delta_time = this_frame_ticks - last_frame_ticks;
+		last_frame_ticks = this_frame_ticks;
+
+
+		if (delta_time < K_TARGET_DELTA_TIME)
+		{
+			SDL_Delay(K_TARGET_DELTA_TIME - delta_time);
+			delta_time = K_TARGET_DELTA_TIME;
+		}
+
 		SDL_Event event;
 
 		while (SDL_PollEvent(&event))
@@ -97,17 +120,25 @@ int main(int argc, char* argv[])
 			ImGui_ImplSDL2_ProcessEvent(&event);
 		}
 
+
 		ImGui_ImplSDLRenderer2_NewFrame();
 		ImGui_ImplSDL2_NewFrame(window_ptr);
 		ImGui::NewFrame();
 
-		ImGui::Begin("Test");
-		ImGui::Text("Hi, I am text ...");
-		ImGui::End();
+		// ImGui::Begin("Debug");
+		// 	float fps = 1000.0f / delta_time;
+		// 	ImGui::InputFloat("FPS", &fps, 0, 0, 0, ImGuiInputTextFlags_ReadOnly);
+		// 	// ImGui::Text("fps " + std::__int_to_char(fps));
+		// ImGui::End();
 
-		ImGui::Begin("Image");
-		ImGui::Image( texture_ptr, ImVec2(100, 100));
-		ImGui::End();
+		// ImGui::ShowDebugLogWindow();
+
+		// ImGui::Begin("Image");
+		// ImGui::Image( texture_ptr, ImVec2(100, 100));
+		// ImGui::End();
+
+
+		w.Render();
 
 		ImGui::Render();
 
