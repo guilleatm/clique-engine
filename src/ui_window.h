@@ -2,8 +2,10 @@
 #define UI_WINDOW_H
 
 #include "imgui.h"
-// #include "ui_manager.h"
+#include "ui_manager.h"
 #include "error_macros.h"
+
+class UIManager;
 
 class UIWindow
 {

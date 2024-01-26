@@ -2,7 +2,7 @@
 
 const int K_DEFAULT_WINDOW_COUNT = 5;
 
-UIManager* UIManager::Create(SDL_Window* window_ptr, SDL_Renderer* renderer_ptr)
+UIManager* UIManager::Instance(SDL_Window* window_ptr, SDL_Renderer* renderer_ptr)
 {
     static UIManager instance = UIManager(window_ptr, renderer_ptr);
     return &instance;

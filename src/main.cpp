@@ -78,10 +78,10 @@ int main(int argc, char* argv[])
 
 
 
-	UIManager* ui_manager = UIManager::Create(window_ptr, renderer_ptr);
+	UIManager* ui_manager = UIManager::Instance(window_ptr, renderer_ptr);
 
 	// UIManager ui_manager = UIManager(window_ptr, renderer_ptr);
-	// UIManager::instance = &ui_manager;
+	// UIManager::instance = ui_manager;
 
 	bool run = true;
 

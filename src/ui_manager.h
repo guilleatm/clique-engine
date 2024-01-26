@@ -10,11 +10,13 @@
 #include "imgui_impl_sdlrenderer2.h"
 #include "ui_window.h"
 
+class UIWindow;
+
 class UIManager
 {
 public:
 
-    static UIManager* Create(SDL_Window* window_ptr, SDL_Renderer* renderer_ptr);
+    static UIManager* Instance(SDL_Window* window_ptr = nullptr, SDL_Renderer* renderer_ptr = nullptr);
     
     void Render();
     void ManageEvent(SDL_Event* event);
