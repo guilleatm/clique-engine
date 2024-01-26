@@ -2,15 +2,16 @@
 #define UI_WINDOW_H
 
 #include "imgui.h"
-#include <string>
+// #include "ui_manager.h"
+#include "error_macros.h"
 
 class UIWindow
 {
 public:
     UIWindow(const char* window_name);
-    void Render();
+    virtual void Render() = 0;
 
-private:
+protected:
     const char* m_window_name;
     bool m_is_open;
 

@@ -68,66 +68,55 @@ int main(int argc, char* argv[])
 
 
 
-	SDL_Texture* texture = SDL_CreateTexture(renderer_ptr, SDL_PIXELFORMAT_BGRA8888, SDL_TEXTUREACCESS_TARGET, 100, 100);
-	SDL_SetRenderTarget(renderer_ptr, texture);
-	SDL_SetRenderDrawColor(renderer_ptr, 100, 21, 32, 255);
+	// SDL_Texture* texture = SDL_CreateTexture(renderer_ptr, SDL_PIXELFORMAT_BGRA8888, SDL_TEXTUREACCESS_TARGET, 100, 100);
+	// SDL_SetRenderTarget(renderer_ptr, texture);
+	// SDL_SetRenderDrawColor(renderer_ptr, 255, 21, 32, 255);
 
 
-	SDL_SetRenderTarget(renderer_ptr, NULL);
+	// SDL_SetRenderTarget(renderer_ptr, NULL);
 
 
 
-	// UIManager lifetime
+
+	UIManager* ui_manager = UIManager::Create(window_ptr, renderer_ptr);
+
+	// UIManager ui_manager = UIManager(window_ptr, renderer_ptr);
+	// UIManager::instance = &ui_manager;
+
+	bool run = true;
+
+	uint32_t last_frame_ticks;
+
+	while (run)
 	{
-		UIManager ui_manager = UIManager(window_ptr, renderer_ptr);
+		uint32_t this_frame_ticks = SDL_GetTicks();
+		float delta_time = this_frame_ticks - last_frame_ticks;
+		last_frame_ticks = this_frame_ticks;
 
-		bool run = true;
-
-		uint32_t last_frame_ticks;
-
-		while (run)
+		if (delta_time < K_TARGET_DELTA_TIME)
 		{
-			uint32_t this_frame_ticks = SDL_GetTicks();
-			float delta_time = this_frame_ticks - last_frame_ticks;
-			last_frame_ticks = this_frame_ticks;
-
-			if (delta_time < K_TARGET_DELTA_TIME)
-			{
-				SDL_Delay(K_TARGET_DELTA_TIME - delta_time);
-				delta_time = K_TARGET_DELTA_TIME;
-			}
-
-			SDL_Event event;
-			while (SDL_PollEvent(&event))
-			{
-				ui_manager.ManageEvent(&event);
-
-				if (event.type == SDL_QUIT)
-				{
-					run = false;
-				}
-			}
-
-			
-			ui_manager.PreRender(window_ptr);
-
-			ImGui::Begin("My render idk");
-			    ImGui::Image(texture, ImVec2(100, 100));
-			ImGui::End();
-
-			ImGui::Begin("TExt");
-			    ImGui::Text("sajoidsoad");
-			ImGui::End();
-
-			SDL_SetRenderDrawColor(renderer_ptr, 120, 180, 255, 255);
-			SDL_RenderClear(renderer_ptr);
-
-			ui_manager.Render();
-
-			SDL_RenderPresent(renderer_ptr);
-			
+			SDL_Delay(K_TARGET_DELTA_TIME - delta_time);
+			delta_time = K_TARGET_DELTA_TIME;
 		}
 
+		SDL_Event event;
+		while (SDL_PollEvent(&event))
+		{
+			ui_manager->ManageEvent(&event);
+
+			if (event.type == SDL_QUIT)
+			{
+				run = false;
+			}
+		}
+
+		SDL_SetRenderDrawColor(renderer_ptr, 120, 180, 255, 255);
+		SDL_RenderClear(renderer_ptr);
+
+		ui_manager->Render();
+
+		SDL_RenderPresent(renderer_ptr);
+		
 	}
 
 	ShutdownSDL(window_ptr, renderer_ptr);
