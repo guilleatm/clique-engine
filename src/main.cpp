@@ -40,12 +40,12 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
-	// IMGUI_CHECKVERSION();
-	//ImGui::CreateContext();
-	// ImGuiIO& io = ImGui::GetIO(); (void) io;
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void) io;
 
-	// ImGui_ImplSDL2_InitForSDLRenderer(window_ptr, renderer_ptr);
-	// ImGui_ImplSDLRenderer2_Init(renderer_ptr);
+	ImGui_ImplSDL2_InitForSDLRenderer(window_ptr, renderer_ptr);
+	ImGui_ImplSDLRenderer2_Init(renderer_ptr);
 
 
 	bool run = true;
@@ -62,23 +62,23 @@ int main(int argc, char* argv[])
 			}
 		}
 
-		// ImGui_ImplSDLRenderer2_NewFrame();
-		// ImGui_ImplSDL2_NewFrame(window_ptr);
-		// ImGui::NewFrame();
+		ImGui_ImplSDLRenderer2_NewFrame();
+		ImGui_ImplSDL2_NewFrame(window_ptr);
+		ImGui::NewFrame();
 
-		// ImGui::Begin("Test");
+		ImGui::Begin("Test");
 
-		// ImGui::Text("Hi, I am text ...");
+		ImGui::Text("Hi, I am text ...");
 
-		// ImGui::End();
+		ImGui::End();
 
-		// ImGui::Render();
+		ImGui::Render();
 
 		SDL_SetRenderDrawColor(renderer_ptr, 120, 180, 255, 255);
 		SDL_RenderClear(renderer_ptr);
 
 
-		// ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
+		ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
 
 		SDL_RenderPresent(renderer_ptr);
 		
