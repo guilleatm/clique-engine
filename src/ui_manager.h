@@ -12,8 +12,14 @@ class UIManager
 public:
     UIManager(SDL_Window* window_ptr, SDL_Renderer* renderer_ptr);
     ~UIManager();
-    void Render(SDL_Window* window_ptr);
+    
+    void PreRender(SDL_Window* window_ptr);
+    void Render();
+    virtual void Draw();
 
+    void ManageEvent(SDL_Event* event);
+
+    
 private:
 
 

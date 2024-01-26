@@ -17,13 +17,28 @@ UIManager::~UIManager()
 	ImGui::DestroyContext();
 }
 
-void UIManager::Render(SDL_Window* window_ptr)
+
+void UIManager::ManageEvent(SDL_Event* event)
+{
+    ImGui_ImplSDL2_ProcessEvent(event);
+}
+
+void UIManager::PreRender(SDL_Window* window_ptr)
 {
     ImGui_ImplSDLRenderer2_NewFrame();
     ImGui_ImplSDL2_NewFrame();
     ImGui::NewFrame();
 
-    ImGui::ShowDemoWindow();
+    Draw();
+}
 
+void UIManager::Render()
+{
     ImGui::Render();
+    ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
+}
+
+void UIManager::Draw()
+{
+
 }
