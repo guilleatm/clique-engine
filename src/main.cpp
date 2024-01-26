@@ -3,13 +3,12 @@
 #include "imgui_impl_sdlrenderer2.h"
 
 #include <SDL.h>
+#include <SDL_image.h>
 
 #include <iostream>
 
 int main(int argc, char* argv[])
 {
-	std::cout << "Program running" << std::endl;
-
 	
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -40,6 +39,40 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
+	SDL_Texture* texture_ptr = SDL_CreateTexture(
+		renderer_ptr,
+		SDL_PIXELFORMAT_BGRA8888,
+		SDL_TEXTUREACCESS_TARGET,
+		100,
+		100
+	);
+
+	int img_init_flags = IMG_INIT_PNG | IMG_INIT_JPG;
+	if (!(IMG_Init(img_init_flags)) & img_init_flags)
+	{
+		return -1;
+	}
+
+	SDL_Surface* surface_ptr = IMG_Load("frog_square.png");
+	SDL_Texture* player_texture_ptr = SDL_CreateTextureFromSurface(renderer_ptr, surface_ptr);
+	
+	// std::cout << surface_ptr << std::endl;
+	
+	SDL_FreeSurface(surface_ptr);
+
+
+	// std::cout << texture_ptr << std::endl;
+	// std::cout << window_ptr << std::endl;
+
+	SDL_SetRenderTarget(renderer_ptr, texture_ptr);
+	SDL_SetRenderDrawColor(renderer_ptr, 255, 0, 0, 255);
+	SDL_RenderClear(renderer_ptr);
+
+	SDL_Rect rect { 0, 0, 10, 10 };
+	SDL_RenderCopy(renderer_ptr, player_texture_ptr, NULL, &rect);
+
+	SDL_SetRenderTarget(renderer_ptr, NULL);
+
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO(); (void) io;
@@ -60,6 +93,8 @@ int main(int argc, char* argv[])
 			{
 				run = false;
 			}
+
+			ImGui_ImplSDL2_ProcessEvent(&event);
 		}
 
 		ImGui_ImplSDLRenderer2_NewFrame();
@@ -67,9 +102,11 @@ int main(int argc, char* argv[])
 		ImGui::NewFrame();
 
 		ImGui::Begin("Test");
-
 		ImGui::Text("Hi, I am text ...");
+		ImGui::End();
 
+		ImGui::Begin("Image");
+		ImGui::Image( texture_ptr, ImVec2(100, 100));
 		ImGui::End();
 
 		ImGui::Render();
@@ -84,9 +121,11 @@ int main(int argc, char* argv[])
 		
 	}
 
-	// ImGui_ImplSDLRenderer2_Shutdown();
-	// ImGui_ImplSDL2_Shutdown();
-	// ImGui::DestroyContext();
+	ImGui_ImplSDLRenderer2_Shutdown();
+	ImGui_ImplSDL2_Shutdown();
+	ImGui::DestroyContext();
+
+	SDL_DestroyTexture(texture_ptr);
 
 	SDL_DestroyRenderer(renderer_ptr);
 	SDL_DestroyWindow(window_ptr);
