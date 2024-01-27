@@ -13,4 +13,7 @@ void InspectorUI::Render()
     }
 
     ImGui::End();
+
+
+    ImGui::ShowDemoWindow();
 }

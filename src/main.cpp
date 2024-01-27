@@ -18,13 +18,14 @@ int InitSDL(SDL_Window*& window_ptr, SDL_Renderer*& renderer_ptr)
 		return -1;
 	}
 
+	uint32_t flags = SDL_WINDOW_RESIZABLE | SDL_WINDOW_MAXIMIZED | SDL_WINDOW_SHOWN;
 	window_ptr = SDL_CreateWindow
 	(
 		"Clique Engine",
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
 		600,400,
-		SDL_WINDOW_SHOWN
+		flags
 	);
 
 	if (!window_ptr)
@@ -65,7 +66,7 @@ int main(int argc, char* argv[])
 
 	// SDL_SetRenderDrawColor(renderer_ptr, 120, 180, 255, 255);
 
-
+	
 
 	// SDL_Texture* texture = SDL_CreateTexture(renderer_ptr, SDL_PIXELFORMAT_BGRA8888, SDL_TEXTUREACCESS_TARGET, 100, 100);
 	// SDL_SetRenderTarget(renderer_ptr, texture);
@@ -73,9 +74,6 @@ int main(int argc, char* argv[])
 
 
 	// SDL_SetRenderTarget(renderer_ptr, NULL);
-
-
-
 
 	UIManager* ui_manager = UIManager::Instance(window_ptr, renderer_ptr);
 	InspectorUI* inspector = new InspectorUI();

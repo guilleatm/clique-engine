@@ -18,7 +18,9 @@ UIManager::UIManager(SDL_Window* window_ptr, SDL_Renderer* renderer_ptr)
  
     IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO(); (void) io;
+	ImGuiIO& io = ImGui::GetIO(); //(void) io;
+    
+    io.ConfigFlags = ImGuiConfigFlags_DockingEnable;
 
 	ImGui_ImplSDL2_InitForSDLRenderer(m_window_ptr, m_renderer_ptr);
 	ImGui_ImplSDLRenderer2_Init(m_renderer_ptr);
@@ -48,12 +50,10 @@ void UIManager::Render()
     ImGui_ImplSDL2_NewFrame();
     ImGui::NewFrame();
 
-
     for (int i = 0; i < m_windows.size(); i++)
     {
         m_windows[i]->Render();
     }
-
 
     ImGui::Render();
     ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
