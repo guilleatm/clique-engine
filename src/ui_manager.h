@@ -29,10 +29,11 @@ public:
     void RemoveUIWindow(UIWindow* ui_window);
 
     template <typename T, typename = std::enable_if_t<std::is_base_of<UIWindow, T>::value>>
-    void AddUIWindow()
+    T* AddUIWindow()
     {
         T* window = new T();
         m_windows.push_back(window);
+        return window;
     }
 
     
@@ -44,7 +45,6 @@ private:
     SDL_Renderer* m_renderer_ptr;
 
     std::vector<UIWindow*> m_windows;
-
 };
 
 #endif // UI_MANAGER_H

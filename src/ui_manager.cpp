@@ -18,6 +18,9 @@ UIManager::UIManager(SDL_Window* window_ptr, SDL_Renderer* renderer_ptr)
 
 	ImGui_ImplSDL2_InitForSDLRenderer(m_window_ptr, m_renderer_ptr);
 	ImGui_ImplSDLRenderer2_Init(m_renderer_ptr);
+
+    // Defaults
+    AddUIWindow<Console>();
 }
 
 UIManager::~UIManager()
@@ -95,6 +98,6 @@ void UIManager::Render()
 void UIManager::RemoveUIWindow(UIWindow* ui_window)
 {
     std::vector<UIWindow*>::iterator it = std::find(m_windows.begin(), m_windows.end(), ui_window);
-    m_windows.erase(it);
     delete *it;
+    m_windows.erase(it);
 }

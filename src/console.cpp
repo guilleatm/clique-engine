@@ -54,6 +54,7 @@ void Console::Print(const char* fmt, ...) //IM_FMTARGS(2)
 void Console::Render()
 {
     ImGui::SetNextWindowSize(ImVec2(520, 600), ImGuiCond_FirstUseEver);
+
     if (!ImGui::Begin(m_window_name, &m_is_open))
     {
         ImGui::End();
