@@ -1,3 +1,6 @@
 [submodule "submodules/imgui"]
 	path = submodules/imgui
 	url = git@github.com:ocornut/imgui.git
+[submodule "submodules/flecs"]
+	path = submodules/flecs
+	url = git@github.com:SanderMertens/flecs.git
