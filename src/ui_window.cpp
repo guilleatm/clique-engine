@@ -2,8 +2,6 @@
 
 UIWindow::UIWindow(const char* window_name)
 {
+    m_is_open = true;
     m_window_name = window_name;
-
-    ERROR_IF(UIManager::Instance() == nullptr);
-    UIManager::Instance()->AddUIWindow(this);
 }

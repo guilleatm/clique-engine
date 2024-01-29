@@ -2,18 +2,16 @@
 
 Console::Console() : UIWindow("Console")
 {
-    //IMGUI_DEMO_MARKER("Examples/Console");
     Clear();
     memset(m_input_buffer, 0, sizeof(m_input_buffer));
     m_history_pos = -1;
 
-    // "CLASSIFY" is here to provide the test case where "C"+[tab] completes to "CL" and display multiple matches.
     m_commands.push_back("HELP");
     m_commands.push_back("HISTORY");
     m_commands.push_back("CLEAR");
-    m_commands.push_back("CLASSIFY");
     m_auto_scroll = true;
     m_scroll_to_bottom = false;
+
     Print("Welcome to the Clique Engine console!");
 }
 
@@ -62,33 +60,14 @@ void Console::Render()
         return;
     }
 
-    // As a specific feature guaranteed by the library, after calling Begin() the last Item represent the title bar.
-    // So e.g. IsItemHovered() will return true when hovering the title bar.
-    // Here we create a context menu only available from the title bar.
-    if (ImGui::BeginPopupContextItem())
-    {
-        if (ImGui::MenuItem("Close Console"))
-        {
-            m_is_open = false;
-        }
-        ImGui::EndPopup();
-    }
-
-    // ImGui::TextWrapped(
-    //     "This example implements a console with basic coloring, completion (TAB key) and history (Up/Down keys). A more elaborate "
-    //     "implementation may want to store entries along with extra data such as timestamp, emitter, etc.");
-    // ImGui::TextWrapped("Enter 'HELP' for help.");
-
-    // TODO: display items starting from the bottom
-
-    // if (ImGui::SmallButton("Add Debug Text"))  { AddLog("%d some text", Items.Size); AddLog("some more text"); AddLog("display very important message here!"); }
-    // ImGui::SameLine();
-    // // if (ImGui::SmallButton("Add Debug Error")) { AddLog("[error] something went wrong"); }
-    // ImGui::SameLine();
-    // if (ImGui::SmallButton("Clear"))           { Clear(); }
-    // ImGui::SameLine();
-    // bool copy_to_clipboard = ImGui::SmallButton("Copy");
-    //static float t = 0.0f; if (ImGui::GetTime() - t > 0.02f) { t = ImGui::GetTime(); AddLog("Spam %f", t); }
+    // if (ImGui::BeginPopupContextItem())
+    // {
+    //     if (ImGui::MenuItem("Close Console"))
+    //     {
+    //         m_is_open = false;
+    //     }
+    //     ImGui::EndPopup();
+    // }
 
     // Options menu
     if (ImGui::BeginPopup("Options"))
@@ -114,30 +93,6 @@ void Console::Render()
             ImGui::EndPopup();
         }
 
-        // Display every line as a separate entry so we can change their color or add custom widgets.
-        // If you only want raw text you can use ImGui::TextUnformatted(log.begin(), log.end());
-        // NB- if you have thousands of entries this approach may be too inefficient and may require user-side clipping
-        // to only process visible items. The clipper will automatically measure the height of your first item and then
-        // "seek" to display only items in the visible area.
-        // To use the clipper we can replace your standard loop:
-        //      for (int i = 0; i < Items.Size; i++)
-        //   With:
-        //      ImGuiListClipper clipper;
-        //      clipper.Begin(Items.Size);
-        //      while (clipper.Step())
-        //         for (int i = clipper.DisplayStart; i < clipper.DisplayEnd; i++)
-        // - That your items are evenly spaced (same height)
-        // - That you have cheap random access to your elements (you can access them given their index,
-        //   without processing all the ones before)
-        // You cannot this code as-is if a filter is active because it breaks the 'cheap random-access' property.
-        // We would need random-access on the post-filtered list.
-        // A typical application wanting coarse clipping and filtering may want to pre-compute an array of indices
-        // or offsets of items that passed the filtering test, recomputing this array when user changes the filter,
-        // and appending newly elements as they are inserted. This is left as a task to the user until we can manage
-        // to improve this example code!
-        // If your items are of variable height:
-        // - Split them into same height items would be simpler and facilitate random-seeking into your list.
-        // - Consider using manual call to IsRectVisible() and skipping extraneous decoration from your items.
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(4, 1)); // Tighten spacing
 
         for (const char* item : m_items)

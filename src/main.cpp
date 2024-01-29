@@ -65,25 +65,7 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
-	// SDL_SetRenderDrawColor(renderer_ptr, 120, 180, 255, 255);
-
-	
-
-	// SDL_Texture* texture = SDL_CreateTexture(renderer_ptr, SDL_PIXELFORMAT_BGRA8888, SDL_TEXTUREACCESS_TARGET, 100, 100);
-	// SDL_SetRenderTarget(renderer_ptr, texture);
-	// SDL_SetRenderDrawColor(renderer_ptr, 255, 21, 32, 255);
-
-
-	// SDL_SetRenderTarget(renderer_ptr, NULL);
-
-	UIManager* ui_manager = UIManager::Instance(window_ptr, renderer_ptr);
-	InspectorUI* inspector = new InspectorUI();
-	Console* console = new Console();
-
-	
-
-	// UIManager ui_manager = UIManager(window_ptr, renderer_ptr);
-	// UIManager::instance = ui_manager;
+	UIManager ui_manager = UIManager(window_ptr, renderer_ptr);
 
 	bool run = true;
 
@@ -104,7 +86,7 @@ int main(int argc, char* argv[])
 		SDL_Event event;
 		while (SDL_PollEvent(&event))
 		{
-			ui_manager->ManageEvent(&event);
+			ui_manager.ManageEvent(&event);
 
 			if (event.type == SDL_QUIT)
 			{
@@ -115,7 +97,7 @@ int main(int argc, char* argv[])
 		SDL_SetRenderDrawColor(renderer_ptr, 120, 180, 255, 255);
 		SDL_RenderClear(renderer_ptr);
 
-		ui_manager->Render();
+		ui_manager.Render();
 
 		SDL_RenderPresent(renderer_ptr);
 		

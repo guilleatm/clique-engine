@@ -1,6 +1,7 @@
 #ifndef CONSOLE_H
 #define CONSOLE_H
 
+#include <string>
 #include "ui_window.h"
 #include "imgui.h"
 

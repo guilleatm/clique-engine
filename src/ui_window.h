@@ -1,9 +1,7 @@
+#pragma once
+
 #ifndef UI_WINDOW_H
 #define UI_WINDOW_H
-
-#include "imgui.h"
-#include "ui_manager.h"
-#include "error_macros.h"
 
 class UIManager;
 
@@ -17,6 +15,8 @@ protected:
     const char* m_window_name;
     bool m_is_open;
 
+
+    friend class UIManager;
 };
 
 #endif // UI_WINDOW_H
