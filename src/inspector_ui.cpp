@@ -4,33 +4,7 @@ InspectorUI::InspectorUI() : UIWindow("Inspector")
 {
     m_entries.resize(K_MAX_LOG_ENTRIES);
 
-    Print("This");
 
-    Print("This");
-    Print("This");
-    Print("This");
-    Print("This");
-    Print("This");
-    Print("This");
-    Print("This");
-    Print("This");
-    Print("This");
-    Print("This");
-    Print("This");
-    Print("This");
-    Print("This");
-    Print("This");
-    Print("This");
-
-    Print("Hello");
-    Print("Worlf");
-    Print("This");
-    Print("Is my console");
-    Print("This");
-    Print("This");
-    Print("This is a super long parr that I dont know if it fits, This is a super long parr that I dont know if it fits, This is a super long parr that I dont know if it fits, This is a super long parr that I dont know if it fits, This is a super long parr that I dont know if it fits");
-    Print("This");
-    Print("This");
 
 }
 
@@ -51,8 +25,6 @@ void InspectorUI::Clear()
 
 void InspectorUI::Render()
 {
-
-    ImGui::ShowDemoWindow();
 
     ImGuiWindowFlags flags = ImGuiWindowFlags_NoScrollbar;
     if (ImGui::Begin(m_window_name, &m_is_open, flags))

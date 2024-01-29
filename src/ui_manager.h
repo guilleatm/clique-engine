@@ -27,6 +27,8 @@ public:
     
 private:
 
+    bool m_show_demo_window = false;
+
     UIManager(SDL_Window* window_ptr, SDL_Renderer* renderer_ptr);
     ~UIManager();
 
