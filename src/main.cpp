@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include "inspector_ui.h"
+#include "console.h"
 
 const float K_TARGET_DELTA_TIME = 1000.0f / K_TARGET_FRAMERATE;
 
@@ -77,6 +78,7 @@ int main(int argc, char* argv[])
 
 	UIManager* ui_manager = UIManager::Instance(window_ptr, renderer_ptr);
 	InspectorUI* inspector = new InspectorUI();
+	Console* console = new Console();
 
 	
 
