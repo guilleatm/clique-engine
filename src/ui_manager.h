@@ -15,7 +15,10 @@
 #include "ui_window.h"
 #include "error_macros.h"
 
+
+// This going to Editor
 #include "console.h"
+#include "game_view.h"
 
 class UIWindow;
 

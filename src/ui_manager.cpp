@@ -2,6 +2,7 @@
 
 const int K_DEFAULT_WINDOW_COUNT = 5;
 const std::string K_CONSOLE_KEY = "console";
+const std::string K_GAME_VIEW_KEY = "game_view";
 
 UIManager::UIManager(SDL_Window* window_ptr, SDL_Renderer* renderer_ptr)
 {
@@ -22,8 +23,9 @@ UIManager::UIManager(SDL_Window* window_ptr, SDL_Renderer* renderer_ptr)
 	ImGui_ImplSDL2_InitForSDLRenderer(m_window_ptr, m_renderer_ptr);
 	ImGui_ImplSDLRenderer2_Init(m_renderer_ptr);
 
-    // Defaults
+    // Defaults, // This going to Editor
     AddUIWindow<Console>(K_CONSOLE_KEY);
+    AddUIWindow<GameView>(K_GAME_VIEW_KEY)->Prepare(renderer_ptr);
 }
 
 UIManager::~UIManager()
