@@ -4,14 +4,16 @@
 #define UI_MANAGER_H
 
 #include <SDL.h>
-#include <vector>
-#include <algorithm>
+#include <unordered_map>
+#include <queue>
+
 #include <type_traits>
 
 #include "imgui.h"
 #include "imgui_impl_sdl2.h"
 #include "imgui_impl_sdlrenderer2.h"
 #include "ui_window.h"
+#include "error_macros.h"
 
 #include "console.h"
 
@@ -26,16 +28,15 @@ public:
     void Render();
     void ManageEvent(SDL_Event* event);
 
-    void RemoveUIWindow(UIWindow* ui_window);
+    void RemoveUIWindow(std::string key);
 
     template <typename T, typename = std::enable_if_t<std::is_base_of<UIWindow, T>::value>>
-    T* AddUIWindow()
+    T* AddUIWindow(std::string key)
     {
-        T* window = new T();
-        m_windows.push_back(window);
-        return window;
+        T* ui_window_ptr = new T();
+        m_windows[key] = ui_window_ptr;
+        return ui_window_ptr;
     }
-
     
 private:
 
@@ -44,7 +45,11 @@ private:
     SDL_Window* m_window_ptr;
     SDL_Renderer* m_renderer_ptr;
 
-    std::vector<UIWindow*> m_windows;
+    std::unordered_map<std::string, UIWindow*> m_windows;
+    std::queue<std::string> m_windows_to_remove;
+
+    void RemoveUIWindows();
+
 };
 
 #endif // UI_MANAGER_H
