@@ -10,6 +10,9 @@
 #include "ui_window.h"
 #include "error_macros.h"
 
+// #include "Engine/engine.h"
+
+
 #include "console.h"
 
 class GameView : public UIWindow
@@ -27,6 +30,7 @@ public:
 private:
 
     SDL_Texture* m_texture_ptr;
+    // Engine* m_engine;
 
 
 };
