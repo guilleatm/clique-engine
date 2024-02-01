@@ -2,12 +2,11 @@
 
 GameView::GameView(UIManager* ui_manager) : UIWindow(ui_manager, "Game View")
 {
-    m_engine = new Engine();
+    m_engine = &Editor::Instance().engine;
 }
 
 GameView::~GameView()
 {
-    delete m_engine;
     SDL_DestroyTexture(m_texture_ptr);
 }
 

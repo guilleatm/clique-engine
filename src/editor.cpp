@@ -1,9 +1,8 @@
 #include "editor.h"
 
-const float K_TARGET_DELTA_TIME = 1000.0f / K_EDITOR_TARGET_FRAMERATE;
+const float K_TARGET_EDITOR_DELTA_TIME = 1000.0f / K_EDITOR_TARGET_FRAMERATE;
 
-
-Editor::Editor()
+void Editor::Prepare()
 {
 	if (InitSDL() < 0)
 	{

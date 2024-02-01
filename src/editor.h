@@ -16,19 +16,27 @@ class Editor
 {
 
 public:
-    Editor();
-    ~Editor();
+
+    static Editor& Instance()
+    {
+        static Editor instance;
+        return instance;
+    }
+
+    void Prepare();
+    void Start();
 
     // This is a NonCopiableClass
-    Editor(const Editor&);
-    Editor& operator=(const Editor&);
+    Editor(const Editor&) = delete;
+    Editor& operator=(const Editor&) = delete;
 
-    void Start();
+    Engine engine;
 
 private:
 
-    Engine m_engine;
-
+    Editor() = default;
+    ~Editor();
+    
     SDL_Window* m_window_ptr;
     SDL_Renderer* m_renderer_ptr;
 

@@ -5,12 +5,13 @@
 
 #include <string>
 
-// engine or edtor?
-const int K_EDITOR_TARGET_FRAMERATE = 10;
+const int K_ENGINE_TARGET_FRAMERATE = 30;
 
 
 
-// This sould be editor settings
+// EDITOR SETTINGS
+
+const int K_EDITOR_TARGET_FRAMERATE = 15;
 
 const std::string K_CONSOLE_KEY = "console";
 const std::string K_GAME_VIEW_KEY = "game_view";
