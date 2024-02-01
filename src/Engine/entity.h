@@ -12,7 +12,7 @@ class Entity
 
 public:
     Entity(Engine* engine_ptr, flecs::entity_t flecs_entity);
-    ~Entity();
+    ~Entity() = default;
 
     // template <typename T>
     // void AddComponent()
@@ -21,6 +21,7 @@ public:
     // }
 
 private:
+
 
     flecs::entity m_flecs_entity;
     Engine* m_engine_ptr;

@@ -8,6 +8,7 @@ Engine::Engine()
 Entity Engine::CreateEntity()
 {
     flecs::entity flecs_entity = m_world.entity();
+    flecs_entity.add<Transform>();
     return Entity(this, flecs_entity);
 }
 

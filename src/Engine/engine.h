@@ -7,6 +7,8 @@
 #include <flecs.h>
 #include "entity.h"
 
+#include "transform.h"
+
 class Engine
 {
 
@@ -19,10 +21,11 @@ public:
 
     Entity CreateEntity();
 
+    flecs::world m_world;
+
 private:
 
     bool m_run;
-    flecs::world m_world;
 
 };
 

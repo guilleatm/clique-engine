@@ -21,8 +21,9 @@ UIManager::UIManager(SDL_Window* window_ptr, SDL_Renderer* renderer_ptr)
 	ImGui_ImplSDL2_InitForSDLRenderer(m_window_ptr, m_renderer_ptr);
 	ImGui_ImplSDLRenderer2_Init(m_renderer_ptr);
 
-    // Defaults, // This going to Editor
+    // Defaults, // This going to Editor?
     AddUIWindow<Console>(K_CONSOLE_KEY);
+    AddUIWindow<Tree>(K_TREE_KEY);
     AddUIWindow<GameView>(K_GAME_VIEW_KEY)->Prepare(renderer_ptr);
 }
 
@@ -53,6 +54,15 @@ void UIManager::Render()
     {
         if (ImGui::BeginMenu("Windows"))
         {
+
+            if (ImGui::MenuItem("Tree"))
+            {
+                auto it = m_windows.find(K_TREE_KEY);
+                if (it == m_windows.end())
+                {
+                    AddUIWindow<Tree>(K_TREE_KEY);
+                }
+            }
 
             if (ImGui::MenuItem("Console"))
             {

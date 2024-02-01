@@ -21,6 +21,7 @@
 // This going to Editor
 #include "console.h"
 #include "game_view.h"
+#include "tree.h"
 
 class UIWindow;
 
