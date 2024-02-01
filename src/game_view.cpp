@@ -1,7 +1,8 @@
 #include "game_view.h"
 
-GameView::GameView() : UIWindow("Game View")
+GameView::GameView(UIManager* ui_manager) : UIWindow(ui_manager, "Game View")
 {
+    m_engine = new Engine();
 }
 
 GameView::~GameView()
@@ -26,22 +27,41 @@ void GameView::Render()
     {
         if (ImGui::Button("Play"))
         {
-            // m_engine = new Engine();
+            Console::EditorPrint(m_ui_manager, "Play");
+            m_state = GameViewState::Play;
         }
 
         ImGui::SameLine();
 
-        // if(ImGui::Button("Stop"))
-        // {
-        //     delete m_engine;
-        // }
+        if (ImGui::Button("Pause"))
+        {
+            Console::EditorPrint(m_ui_manager, "Pause");
+            m_state = GameViewState::Pause;
+        }
 
-        // ImGui::Separator();
-        
+        ImGui::SameLine();
 
-        // if (m_engine != nullptr)
+        if(ImGui::Button("Stop"))
+        {
+            Console::EditorPrint(m_ui_manager, "Stop");
+            m_state = GameViewState::Stop;
+        }
+
+        ImGui::Separator();
+
+        // switch (m_state)
         // {
+        // case GameViewState::Play:
         //     m_engine->Update();
+        //     // No break
+
+        // case GameViewState::Pause:
+        //     m_engine->Render();
+        //     break;
+        
+        // case GameViewState::Stop:
+        // default:
+        //     break;
         // }
 
 

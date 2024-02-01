@@ -1,6 +1,6 @@
 #include "console.h"
 
-Console::Console() : UIWindow("Console")
+Console::Console(UIManager* ui_manager) : UIWindow(ui_manager, "Console")
 {
     Clear();
     memset(m_input_buffer, 0, sizeof(m_input_buffer));
@@ -24,6 +24,16 @@ Console::~Console()
     }
 }
 
+void Console::EditorPrint(UIManager* ui_manager, const char* message)
+{
+    Console* console_ptr;
+    bool found = ui_manager->TryGetUIWindow<Console>(K_CONSOLE_KEY, console_ptr);
+    if (found)
+    {
+        console_ptr->Print(message);
+    }
+}
+
 // Portable helpers
 int   Console::Stricmp(const char* s1, const char* s2)         { int d; while ((d = toupper(*s2) - toupper(*s1)) == 0 && *s1) { s1++; s2++; } return d; }
 int   Console::Strnicmp(const char* s1, const char* s2, int n) { int d = 0; while (n > 0 && (d = toupper(*s2) - toupper(*s1)) == 0 && *s1) { s1++; s2++; n--; } return d; }
@@ -41,6 +51,8 @@ void Console::Clear()
 
 void Console::Print(const char* fmt, ...) //IM_FMTARGS(2)
 {
+
+    std::cout << "Console: " << fmt << std::endl;
     // FIXME-OPT
     char buf[1024];
     va_list args;

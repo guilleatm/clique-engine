@@ -15,6 +15,8 @@
 #include "ui_window.h"
 #include "error_macros.h"
 
+#include "engine_settings.h"
+
 
 // This going to Editor
 #include "console.h"
@@ -33,12 +35,31 @@ public:
 
     void RemoveUIWindow(std::string key);
 
-    template <typename T, typename = std::enable_if_t<std::is_base_of<UIWindow, T>::value>>
+    // template <typename T, typename = std::enable_if_t<std::is_base_of<UIWindow, T>::value>>
+    template <typename T>
     T* AddUIWindow(std::string key)
     {
-        T* ui_window_ptr = new T();
+        T* ui_window_ptr = new T(this);
         m_windows[key] = ui_window_ptr;
         return ui_window_ptr;
+    }
+
+    template <typename T>
+    T* GetUIWindow(std::string key)
+    {
+        return (T*) m_windows[key];
+    }
+
+    template <typename T>
+    bool TryGetUIWindow(const std::string& key, T*& out)
+    {
+        auto it = m_windows.find(key);
+        if (it != m_windows.end())
+        {
+            out = (T*)(it->second);
+            return true;
+        }
+        return false;
     }
     
 private:

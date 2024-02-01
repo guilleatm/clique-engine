@@ -1,8 +1,6 @@
 #include "ui_manager.h"
 
 const int K_DEFAULT_WINDOW_COUNT = 5;
-const std::string K_CONSOLE_KEY = "console";
-const std::string K_GAME_VIEW_KEY = "game_view";
 
 UIManager::UIManager(SDL_Window* window_ptr, SDL_Renderer* renderer_ptr)
 {

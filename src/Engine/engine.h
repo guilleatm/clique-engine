@@ -15,11 +15,13 @@ public:
     ~Engine() = default;
 
     void Update();
+    void Render();
 
     Entity CreateEntity();
 
 private:
 
+    bool m_run;
     flecs::world m_world;
 
 };

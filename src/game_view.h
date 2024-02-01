@@ -10,16 +10,26 @@
 #include "ui_window.h"
 #include "error_macros.h"
 
-// #include "Engine/engine.h"
+#include "Engine/engine.h"
+
+#include "ui_manager.h"
 
 
 #include "console.h"
+
+
+enum GameViewState
+{
+    Stop,
+    Pause,
+    Play
+};
 
 class GameView : public UIWindow
 {
 
 public:
-    GameView();
+    GameView(UIManager* ui_manager);
     ~GameView();
 
     void Prepare(SDL_Renderer* renderer_ptr);
@@ -30,8 +40,9 @@ public:
 private:
 
     SDL_Texture* m_texture_ptr;
-    // Engine* m_engine;
+    Engine* m_engine;
 
+    GameViewState m_state;
 
 };
 

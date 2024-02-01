@@ -13,5 +13,10 @@ Entity Engine::CreateEntity()
 
 void Engine::Update()
 {
-    std::cout << "Engine update" << std::endl;
+
+}
+
+void Engine::Render()
+{
+
 }

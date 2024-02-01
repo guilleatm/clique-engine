@@ -3,6 +3,7 @@
 
 #include <string>
 #include "ui_window.h"
+#include "ui_manager.h"
 #include "imgui.h"
 
 class Console : public UIWindow
@@ -23,7 +24,7 @@ private:
     static void  Strtrim(char* s);
 
 public:
-    Console();
+    Console(UIManager* ui_manager);
     ~Console();
 
     void Render() override;
@@ -31,6 +32,8 @@ public:
     void Clear();
     void Print(const char* fmt, ...) IM_FMTARGS(2);
     void ExecCommand(const char* command_line);
+
+    static void EditorPrint(UIManager* ui_manager, const char* message);
 
     static int TextEditCallbackStub(ImGuiInputTextCallbackData* data);
     int TextEditCallback(ImGuiInputTextCallbackData* data);

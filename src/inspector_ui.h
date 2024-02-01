@@ -12,7 +12,8 @@ class InspectorUI : public UIWindow
     const int K_MAX_LOG_ENTRIES = 20;
 
 public:
-    InspectorUI();
+    InspectorUI(UIManager* ui_manager);
+    ~InspectorUI() = default;
 
     void Render() override;
 

@@ -1,11 +1,8 @@
 #include "inspector_ui.h"
 
-InspectorUI::InspectorUI() : UIWindow("Inspector")
+InspectorUI::InspectorUI(UIManager* ui_manager) : UIWindow(ui_manager, "Inspector")
 {
     m_entries.resize(K_MAX_LOG_ENTRIES);
-
-
-
 }
 
 void InspectorUI::Print(std::string message)
