@@ -6,7 +6,8 @@ GameView::GameView(UIManager* ui_manager) : UIWindow(ui_manager, "Game View")
 }
 
 GameView::~GameView()
-{  
+{
+    delete m_engine;
     SDL_DestroyTexture(m_texture_ptr);
 }
 
@@ -49,20 +50,20 @@ void GameView::Render()
 
         ImGui::Separator();
 
-        // switch (m_state)
-        // {
-        // case GameViewState::Play:
-        //     m_engine->Update();
-        //     // No break
+        switch (m_state)
+        {
+        case GameViewState::Play:
+            m_engine->Update();
+            // No break
 
-        // case GameViewState::Pause:
-        //     m_engine->Render();
-        //     break;
+        case GameViewState::Pause:
+            m_engine->Render();
+            break;
         
-        // case GameViewState::Stop:
-        // default:
-        //     break;
-        // }
+        case GameViewState::Stop:
+        default:
+            break;
+        }
 
 
         //ImVec2 windowSize = ImGui::GetWindowSize();

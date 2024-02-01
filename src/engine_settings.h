@@ -6,7 +6,7 @@
 #include <string>
 
 // engine or edtor?
-const int K_TARGET_FRAMERATE = 10;
+const int K_EDITOR_TARGET_FRAMERATE = 10;
 
 
 
