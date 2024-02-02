@@ -23,6 +23,9 @@ public:
 
     void Render(flecs::entity entity);
 
+    void DragDropSource(const int& id);
+    void DragDropTarget(int id);
+
 private:
 
     Engine* m_engine;

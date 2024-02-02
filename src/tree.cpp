@@ -14,9 +14,6 @@ Tree::~Tree()
 void Tree::Render(flecs::entity entity)
 {
     int id = entity.id();
-
-    Console::EditorPrint(m_ui_manager, m_engine->m_world.entity(id).path());
-
     ImGui::PushID(id);
 
     ImGui::TableNextRow();
@@ -37,6 +34,10 @@ void Tree::Render(flecs::entity entity)
     if (has_children)
     {
         bool node_open = ImGui::TreeNodeEx("_Entity", node_flags, "%i %s", id, entity.name());
+
+        DragDropSource(id);
+        DragDropTarget(id);
+
         if (node_open)
         {
             entity.children([&](flecs::entity child)
@@ -51,6 +52,9 @@ void Tree::Render(flecs::entity entity)
     {
         node_flags |= ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Bullet;
         ImGui::TreeNodeEx("_Entity", node_flags, "%i %s", id, entity.name());
+
+        DragDropSource(id);
+        DragDropTarget(id);
     }
 
     if (ImGui::IsItemClicked())
@@ -70,6 +74,17 @@ void Tree::Render()
         if (ImGui::Button("Add Entity"))
         {
             m_engine->CreateEntity();
+        }
+
+        ImGui::SameLine();
+
+        ImGui::TextDisabled("(?)");
+        if (ImGui::BeginItemTooltip())
+        {
+            ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
+            ImGui::TextUnformatted("Powered by flecs.");
+            ImGui::PopTextWrapPos();
+            ImGui::EndTooltip();
         }
 
         ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(2, 2));
@@ -92,4 +107,33 @@ void Tree::Render()
     }
 
     ImGui::End();
+}
+
+
+
+void Tree::DragDropSource(const int& source_id)
+{
+    if (ImGui::BeginDragDropSource())
+    {
+        ImGui::SetDragDropPayload("ID", &source_id, sizeof(int));
+        ImGui::Text("The claaaaaw");
+        ImGui::EndDragDropSource();
+    }
+}
+
+void Tree::DragDropTarget(int target_id)
+{
+    if (ImGui::BeginDragDropTarget())
+    {
+        if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ID"))
+        {
+            int source_id = *(const int*) payload->Data;
+            std::cout << source_id << " -> " << target_id << std::endl;
+            
+            // m_engine->m_world.entity(target_id).remove(flecs::ChildOf, )
+            // m_engine->m_world.entity(target_id).child_of(m_engine->m_world.entity(source_id));
+        }
+
+        ImGui::EndDragDropTarget();
+    }
 }
