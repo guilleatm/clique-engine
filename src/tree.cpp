@@ -33,7 +33,7 @@ void Tree::Render(flecs::entity entity)
 
     if (has_children)
     {
-        bool node_open = ImGui::TreeNodeEx("_Entity", node_flags, "%i %s", id, entity.name());
+        bool node_open = ImGui::TreeNodeEx("_Entity", node_flags, entity.name().c_str());
 
         DragDropSource(id);
         DragDropTarget(id);
@@ -51,7 +51,7 @@ void Tree::Render(flecs::entity entity)
     else
     {
         node_flags |= ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Bullet;
-        ImGui::TreeNodeEx("_Entity", node_flags, "%i %s", id, entity.name());
+        ImGui::TreeNodeEx("_Entity", node_flags, entity.name().c_str());
 
         DragDropSource(id);
         DragDropTarget(id);
@@ -128,10 +128,13 @@ void Tree::DragDropTarget(int target_id)
         if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ID"))
         {
             int source_id = *(const int*) payload->Data;
+
             std::cout << source_id << " -> " << target_id << std::endl;
             
-            // m_engine->m_world.entity(target_id).remove(flecs::ChildOf, )
-            // m_engine->m_world.entity(target_id).child_of(m_engine->m_world.entity(source_id));
+            flecs::entity entity = m_engine->m_world.entity(source_id);
+            flecs::entity new_parent = m_engine->m_world.entity(target_id);
+
+            entity.child_of(new_parent);
         }
 
         ImGui::EndDragDropTarget();

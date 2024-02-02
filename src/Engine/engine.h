@@ -4,6 +4,7 @@
 #define ENGINE_H
 
 #include <iostream>
+#include <string>
 #include <flecs.h>
 #include "entity.h"
 

@@ -8,6 +8,8 @@ Engine::Engine()
 Entity Engine::CreateEntity()
 {
     flecs::entity flecs_entity = m_world.entity();
+    std::string name = "entity " + std::to_string(flecs_entity.id());
+    flecs_entity.set_name(name.c_str());
     flecs_entity.add<Transform>();
     return Entity(this, flecs_entity);
 }
