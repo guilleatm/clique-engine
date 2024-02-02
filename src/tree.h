@@ -7,6 +7,7 @@
 #include "Engine/engine.h"
 #include "ui_manager.h"
 #include "ui_window.h"
+#include "console.h"
 
 #include "flecs.h"
 
@@ -20,13 +21,13 @@ public:
     Tree(UIManager* ui_manager_ptr);
     void Render() override;
 
-
-    void Render(int i);
     void Render(flecs::entity entity);
 
 private:
 
     Engine* m_engine;
+    int m_node_selected = -1;
+
 
     ~Tree();
 
