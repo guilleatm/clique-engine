@@ -29,8 +29,6 @@ public:
 private:
 
     Engine* m_engine;
-    int m_node_selected = -1;
-
 
     ~Tree();
 

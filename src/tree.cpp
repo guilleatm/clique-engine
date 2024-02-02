@@ -13,14 +13,14 @@ Tree::~Tree()
 
 void Tree::Render(flecs::entity entity)
 {
-    int id = entity.id();
+    int64_t id = entity.id();
     ImGui::PushID(id);
 
     ImGui::TableNextRow();
     ImGui::TableSetColumnIndex(0);
     ImGui::AlignTextToFramePadding();
 
-    const bool is_selected = m_node_selected == id;
+    const bool is_selected = Editor::Instance().inspected_entity_id == id;
     
     bool has_children = m_engine->m_world.count(flecs::ChildOf, entity) != 0;
 
@@ -59,7 +59,7 @@ void Tree::Render(flecs::entity entity)
 
     if (ImGui::IsItemClicked())
     {
-        m_node_selected = id;
+        Editor::Instance().inspected_entity_id = id;
     }
 
     ImGui::PopID();
@@ -94,12 +94,18 @@ void Tree::Render()
             ImGui::TableSetupColumn("Entities");
             ImGui::TableHeadersRow();
 
+
+            m_engine->m_world.defer_begin();
+
             m_engine->m_world.filter_builder()
             .without(flecs::ChildOf, flecs::Wildcard)
             .each([this](flecs::entity root_entity)
             {
                 Render(root_entity);
             });
+
+            m_engine->m_world.defer_end();
+
 
             ImGui::EndTable();
         }
@@ -128,9 +134,7 @@ void Tree::DragDropTarget(int target_id)
         if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ID"))
         {
             int source_id = *(const int*) payload->Data;
-
-            std::cout << source_id << " -> " << target_id << std::endl;
-            
+           
             flecs::entity entity = m_engine->m_world.entity(source_id);
             flecs::entity new_parent = m_engine->m_world.entity(target_id);
 

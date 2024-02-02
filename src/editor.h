@@ -31,12 +31,14 @@ public:
     Editor& operator=(const Editor&) = delete;
 
     Engine engine;
+    int64_t inspected_entity_id;
 
 private:
 
     Editor() = default;
     ~Editor();
-    
+
+    // SDL
     SDL_Window* m_window_ptr;
     SDL_Renderer* m_renderer_ptr;
 
