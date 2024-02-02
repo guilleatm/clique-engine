@@ -22,7 +22,7 @@ void Tree::Render(flecs::entity entity)
 
     const bool is_selected = Editor::Instance().inspected_entity_id == id;
     
-    bool has_children = m_engine->m_world.count(flecs::ChildOf, entity) != 0;
+    bool has_children = m_engine->world.count(flecs::ChildOf, entity) != 0;
 
     ImGuiTreeNodeFlags node_flags = ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_OpenOnArrow;
 
@@ -95,16 +95,16 @@ void Tree::Render()
             ImGui::TableHeadersRow();
 
 
-            m_engine->m_world.defer_begin();
+            m_engine->world.defer_begin();
 
-            m_engine->m_world.filter_builder()
+            m_engine->world.filter_builder()
             .without(flecs::ChildOf, flecs::Wildcard)
             .each([this](flecs::entity root_entity)
             {
                 Render(root_entity);
             });
 
-            m_engine->m_world.defer_end();
+            m_engine->world.defer_end();
 
 
             ImGui::EndTable();
@@ -135,8 +135,8 @@ void Tree::DragDropTarget(int target_id)
         {
             int source_id = *(const int*) payload->Data;
            
-            flecs::entity entity = m_engine->m_world.entity(source_id);
-            flecs::entity new_parent = m_engine->m_world.entity(target_id);
+            flecs::entity entity = m_engine->world.entity(source_id);
+            flecs::entity new_parent = m_engine->world.entity(target_id);
 
             entity.child_of(new_parent);
         }

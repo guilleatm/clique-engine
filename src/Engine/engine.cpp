@@ -2,12 +2,12 @@
 
 Engine::Engine()
 {
-    m_world = flecs::world();
+    world = flecs::world();
 }
 
 Entity Engine::CreateEntity()
 {
-    flecs::entity flecs_entity = m_world.entity();
+    flecs::entity flecs_entity = world.entity();
     std::string entity_name = "entity " + std::to_string(flecs_entity.id());
     flecs_entity.set_name(entity_name.c_str());
     flecs_entity.add<Transform>();

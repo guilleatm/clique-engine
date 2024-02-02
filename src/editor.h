@@ -31,7 +31,7 @@ public:
     Editor& operator=(const Editor&) = delete;
 
     Engine engine;
-    int64_t inspected_entity_id;
+    int64_t inspected_entity_id = -1;
 
 private:
 

@@ -22,7 +22,7 @@ public:
 
     Entity CreateEntity();
 
-    flecs::world m_world;
+    flecs::world world;
 
 private:
 

@@ -16,5 +16,7 @@ const int K_EDITOR_TARGET_FRAMERATE = 15;
 const std::string K_CONSOLE_KEY = "console";
 const std::string K_TREE_KEY = "tree";
 const std::string K_GAME_VIEW_KEY = "game_view";
+const std::string K_INSPECTOR_KEY = "inspector";
+
 
 #endif // ENGINE_SETTINGS_H
