@@ -10,6 +10,7 @@ Inspector::Inspector(UIManager* ui_manager_ptr) : UIWindow(ui_manager_ptr, "Insp
 
 void Inspector::Render()
 {
+
     if (ImGui::Begin(m_window_name, &m_is_open))
     {
         if (Editor::Instance().inspected_entity_id > -1)
@@ -44,7 +45,7 @@ void Inspector::RenderEntity(flecs::entity entity)
     char entity_name_buffer[SHORT_STRING_INPUT_BUFFER] = {};
 
 
-    ImGui::InputTextWithHint("Entity Name", entity.name().c_str(), entity_name_buffer, SHORT_STRING_INPUT_BUFFER, ImGuiInputTextFlags_CallbackCompletion, Inspector::Callback);
+    ImGui::InputTextWithHint("###EntityName", entity.name().c_str(), entity_name_buffer, SHORT_STRING_INPUT_BUFFER, ImGuiInputTextFlags_CallbackCompletion, Inspector::Callback);
 
     ImGui::Separator();
 
