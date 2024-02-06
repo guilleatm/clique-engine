@@ -11,20 +11,20 @@ class Entity
 {
 
 public:
-    Entity(Engine* engine_ptr, flecs::entity_t flecs_entity);
+    Entity(flecs::entity flecs_entity);
     ~Entity() = default;
 
-    // template <typename T>
-    // void AddComponent()
-    // {
-    //     m_flecs_entity.add<T>();
-    // }
+    template <typename T>
+    void AddComponent()
+    {
+        m_flecs_entity.add<T>();
+    }
 
 private:
 
 
     flecs::entity m_flecs_entity;
-    Engine* m_engine_ptr;
+    // Engine* m_engine_ptr;
 
 
 };

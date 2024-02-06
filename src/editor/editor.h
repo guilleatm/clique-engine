@@ -7,8 +7,12 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
-#include "Engine/engine.h"
-#include "engine_settings.h"
+#include "flecs.h"
+
+#include "../engine/engine.h"
+
+#include "editor_settings.h"
+#include "error_macros.h"
 
 #include "ui_manager.h"
 

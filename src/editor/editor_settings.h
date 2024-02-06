@@ -1,19 +1,12 @@
+ 
 #pragma once
 
-#ifndef ENGINE_SETTINGS_H
-#define ENGINE_SETTINGS_H
+#ifndef EDITOR_SETTINGS_H
+#define EDITOR_SETTINGS_H
 
 #include <string>
 
-const int K_ENGINE_TARGET_FRAMERATE = 30;
-
-
-
-// EDITOR SETTINGS
-
 const int K_EDITOR_TARGET_FRAMERATE = 15;
-
-
 
 
 
@@ -28,4 +21,4 @@ const std::string K_INSPECTOR_KEY = "inspector";
 const int SHORT_STRING_INPUT_BUFFER = 64;
 
 
-#endif // ENGINE_SETTINGS_H
+#endif // EDITOR_SETTINGS_H

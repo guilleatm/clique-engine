@@ -4,14 +4,14 @@
 #define TREE_H
 
 #include "editor.h"
-#include "Engine/engine.h"
-#include "ui_manager.h"
-#include "ui_window.h"
-#include "console.h"
 
-#include "flecs.h"
+// #include "editor.h"
+// #include "ui_manager.h"
+// #include "ui_window.h"
+// #include "console.h"
 
-#include "Engine/transform.h"
+// #include "flecs.h"
+
 
 class Tree : public UIWindow
 {

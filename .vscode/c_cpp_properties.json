@@ -3,9 +3,13 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**",
+                // "${workspaceFolder}/**",
                 "/usr/include/SDL2",
-                "${workspaceFolder}/include/imgui"
+                "${workspaceFolder}/libs/imgui",
+                "${workspaceFolder}/libs/flecs",
+                "${workspaceFolder}/src/editor",
+                "${workspaceFolder}/src/engine",
+                "${workspaceFolder}/src/game"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

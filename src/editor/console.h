@@ -1,10 +1,7 @@
 #ifndef CONSOLE_H
 #define CONSOLE_H
 
-#include <string>
-#include "ui_window.h"
 #include "ui_manager.h"
-#include "imgui.h"
 
 class Console : public UIWindow
 {

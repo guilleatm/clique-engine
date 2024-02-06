@@ -3,14 +3,14 @@ PROJECT_NAME = clique-engine
 OUTPUT_DIR = build/
 
 SDL = -I/usr/include/SDL2/
-IMGUI_DIR = libraries/imgui
-FLECS_DIR = libraries/flecs
+IMGUI_DIR = libs/imgui
+FLECS_DIR = libs/flecs
 
 IMGUI = -I$(IMGUI_DIR) $(IMGUI_DIR)/imgui.a
 FLECS = -I$(FLECS_DIR) $(FLECS_DIR)/flecs.a
 
 
-SRC = $(wildcard src/*.cpp) $(wildcard src/Engine/*.cpp)
+SRC = $(wildcard src/editor/*.cpp) $(wildcard src/engine/*.cpp) $(wildcard src/game/*.cpp)
 
 default:
 	g++ $(SRC) -o $(OUTPUT_DIR)$(PROJECT_NAME) -std=c++0x $(SDL) $(IMGUI) $(FLECS) -lSDL2 -lSDL2_image

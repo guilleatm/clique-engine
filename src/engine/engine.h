@@ -5,7 +5,11 @@
 
 #include <iostream>
 #include <string>
+
+#include "engine_settings.h"
+
 #include <flecs.h>
+
 #include "entity.h"
 
 #include "transform.h"
@@ -27,6 +31,8 @@ public:
 private:
 
     bool m_run;
+
+    flecs::system update;
 
 };
 

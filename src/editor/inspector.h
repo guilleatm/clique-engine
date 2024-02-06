@@ -6,12 +6,13 @@
 #include <cstring>
 
 #include "editor.h"
-#include "Engine/engine.h"
-#include "ui_manager.h"
-#include "ui_window.h"
-#include "console.h"
 
-#include "flecs.h"
+// // #include "engine/engine.h"
+// #include "ui_manager.h"
+// #include "ui_window.h"
+// #include "console.h"
+
+// #include "flecs.h"
 
 class Inspector : public UIWindow
 {

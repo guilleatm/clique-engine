@@ -3,19 +3,14 @@
 #ifndef UI_MANAGER_H
 #define UI_MANAGER_H
 
-#include <SDL.h>
+
 #include <unordered_map>
 #include <queue>
-
-#include <type_traits>
 
 #include "imgui.h"
 #include "imgui_impl_sdl2.h"
 #include "imgui_impl_sdlrenderer2.h"
 #include "ui_window.h"
-#include "error_macros.h"
-
-#include "engine_settings.h"
 
 
 // This going to Editor
@@ -23,6 +18,7 @@
 #include "game_view.h"
 #include "tree.h"
 #include "inspector.h"
+
 
 class UIWindow;
 
