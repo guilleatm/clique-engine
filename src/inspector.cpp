@@ -24,10 +24,9 @@ void Inspector::Render()
 
 int Inspector::Callback(ImGuiInputTextCallbackData* data)
 {
-    Editor* m_editor = &Editor::Instance();
-
     if (data->EventFlag == ImGuiInputTextFlags_CallbackCompletion)
     {
+        Editor* m_editor = &Editor::Instance();
         m_editor->engine.world.defer_begin();
 
         flecs::entity entity = m_editor->engine.world.entity(m_editor->inspected_entity_id);
@@ -35,7 +34,6 @@ int Inspector::Callback(ImGuiInputTextCallbackData* data)
 
         m_editor->engine.world.defer_end();        
     }
-    std::cout << "callback" << std::endl;
     return 0;
 }
 
@@ -45,7 +43,8 @@ void Inspector::RenderEntity(flecs::entity entity)
 
     char entity_name_buffer[SHORT_STRING_INPUT_BUFFER] = {};
 
-    ImGui::InputTextWithHint("###EntityName", entity.name().c_str(), entity_name_buffer, SHORT_STRING_INPUT_BUFFER, ImGuiInputTextFlags_CallbackCompletion, Inspector::Callback);
+
+    ImGui::InputTextWithHint("Entity Name", entity.name().c_str(), entity_name_buffer, SHORT_STRING_INPUT_BUFFER, ImGuiInputTextFlags_CallbackCompletion, Inspector::Callback);
 
     ImGui::Separator();
 

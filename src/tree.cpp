@@ -33,8 +33,9 @@ void Tree::Render(flecs::entity entity)
 
     if (has_children)
     {
-        bool node_open = ImGui::TreeNodeEx("_Entity", node_flags, entity.name().c_str());
+        bool node_open = ImGui::TreeNodeEx("###Entity", node_flags, entity.name().c_str());
 
+        HandleClick(id);
         DragDropSource(id);
         DragDropTarget(id);
 
@@ -51,15 +52,11 @@ void Tree::Render(flecs::entity entity)
     else
     {
         node_flags |= ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Bullet;
-        ImGui::TreeNodeEx("_Entity", node_flags, entity.name().c_str());
+        ImGui::TreeNodeEx("###Entity", node_flags, entity.name().c_str());
 
+        HandleClick(id);
         DragDropSource(id);
         DragDropTarget(id);
-    }
-
-    if (ImGui::IsItemClicked())
-    {
-        Editor::Instance().inspected_entity_id = id;
     }
 
     ImGui::PopID();
@@ -115,6 +112,14 @@ void Tree::Render()
     ImGui::End();
 }
 
+
+void Tree::HandleClick(int id)
+{
+    if (ImGui::IsItemClicked())
+    {
+        Editor::Instance().inspected_entity_id = id;
+    }
+}
 
 
 void Tree::DragDropSource(const int& source_id)

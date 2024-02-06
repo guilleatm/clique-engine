@@ -92,8 +92,8 @@ void Console::Render()
     // Options, Filter
     if (ImGui::Button("Options"))
         ImGui::OpenPopup("Options");
-    ImGui::SameLine();
-    m_filter.Draw("Filter (\"incl,-excl\") (\"error\")", 180);
+    // ImGui::SameLine();
+    // m_filter.Draw("Filter (\"incl,-excl\") (\"error\")", 180);
     ImGui::Separator();
 
     // Reserve enough left-over height for 1 separator + 1 input text

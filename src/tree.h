@@ -23,8 +23,10 @@ public:
 
     void Render(flecs::entity entity);
 
+    void HandleClick(int id);
     void DragDropSource(const int& id);
     void DragDropTarget(int id);
+
 
 private:
 
