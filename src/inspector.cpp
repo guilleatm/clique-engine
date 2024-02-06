@@ -15,16 +15,40 @@ void Inspector::Render()
         if (Editor::Instance().inspected_entity_id > -1)
         {
             flecs::entity entity = m_engine->world.entity(Editor::Instance().inspected_entity_id);
-            Render(entity);
+            RenderEntity(entity);
         }
     }
 
     ImGui::End();
 }
 
-void Inspector::Render(flecs::entity entity)
+int Inspector::Callback(ImGuiInputTextCallbackData* data)
 {
-    ImGui::Text(entity.name().c_str());
+    Editor* m_editor = &Editor::Instance();
+
+    if (data->EventFlag == ImGuiInputTextFlags_CallbackCompletion)
+    {
+        m_editor->engine.world.defer_begin();
+
+        flecs::entity entity = m_editor->engine.world.entity(m_editor->inspected_entity_id);
+        entity.set_name(data->Buf);
+
+        m_editor->engine.world.defer_end();        
+    }
+    std::cout << "callback" << std::endl;
+    return 0;
+}
+
+void Inspector::RenderEntity(flecs::entity entity)
+{
+    // ImGui::Text(entity.name().c_str());
+
+    char entity_name_buffer[SHORT_STRING_INPUT_BUFFER] = {};
+
+    ImGui::InputTextWithHint("###EntityName", entity.name().c_str(), entity_name_buffer, SHORT_STRING_INPUT_BUFFER, ImGuiInputTextFlags_CallbackCompletion, Inspector::Callback);
+
+    ImGui::Separator();
+
     m_engine->world.defer_begin();
 
     entity.each([this](flecs::id id)
@@ -32,7 +56,14 @@ void Inspector::Render(flecs::entity entity)
         // auto component = m_engine->world.component(component_id);
         // const char* component_name = component.name().c_str();
 
-        ImGui::Text(id.str().c_str());
+        if (id.is_entity())
+        {
+            RenderComponent(m_engine->world.entity(id));
+            // flecs::entity c = m_engine->world.entity(id);
+            // c.add<int>();
+            // int p = c.get<int>();
+        }
+
         // ImGui::Text(std::to_string(component_id).c_str());
     });
 
@@ -40,3 +71,19 @@ void Inspector::Render(flecs::entity entity)
 
 }
 
+void Inspector::RenderComponent(flecs::entity component)
+{
+    if (ImGui::BeginTabBar("_Component", ImGuiTabBarFlags_None))
+    {
+        if (ImGui::BeginTabItem(component.name().c_str()))
+        {
+            ImGui::EndTabItem();
+        }
+        // if (ImGui::BeginTabItem("Details"))
+        // {
+        //     ImGui::Text("ID: 0123456789");
+        //     ImGui::EndTabItem();
+        // }
+        ImGui::EndTabBar();
+    }
+}
