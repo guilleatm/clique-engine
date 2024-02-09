@@ -2,12 +2,18 @@
 
 #include "../engine/engine.h"
 
-class GameScript
+using namespace CliqueEngine;
+
+struct GameScript : public Behaviour
 {
 public:
-    void OnEnable()
+
+    GameScript() = default;
+    ~GameScript() = default;
+
+    virtual void Update()
     {
-        
+        std::cout << "update Game script" << std::endl;
     }
 
 

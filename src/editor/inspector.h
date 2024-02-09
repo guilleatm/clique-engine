@@ -22,7 +22,7 @@ namespace CliqueEngine
     public:
         
         Inspector(UIManager* ui_manager_ptr);
-        void Render() override;
+        virtual void Render() override;
 
         void RenderEntity(flecs::entity entity);
         void RenderComponent(flecs::entity component);

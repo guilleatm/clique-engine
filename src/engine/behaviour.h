@@ -5,17 +5,23 @@
 
 #include "engine.h"
 
+
 struct Behaviour
 {
 
 public:
 
-    virtual void Update() const
+    Behaviour() = default;
+    ~Behaviour() = default;
+
+    virtual void Update()
     {
-        std::cout << "updating beha" << std::endl;
+        std::cout << m_tick++ << std::endl;
     }
     
 private:
+
+    int m_tick = 0;
 
 };
 

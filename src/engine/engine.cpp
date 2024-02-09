@@ -28,18 +28,18 @@ namespace CliqueEngine
             m_render_manager_ptr = render_manager_ptr;
         }
 
-        // update = world.system<Behaviour>()
-        // .kind(flecs::OnUpdate)
-        // .each([](flecs::entity entity, const Behaviour& behaviour)
-        // {
-        //     behaviour.Update();
-        // });
+        update = world.system<Behaviour>()
+        .kind(flecs::OnUpdate)
+        .each([](flecs::entity entity, Behaviour& behaviour)
+        {
+            behaviour.Update();
+        });
 
         // render = world.system<Sprite>()
         // .kind(flecs::PostUpdate)
         // .each([](flecs::entity entity, const Sprite& sprite)
         // {
-            
+        //     // sprite.Render();
         // });
     }
 
@@ -65,8 +65,6 @@ namespace CliqueEngine
 
     void Engine::Render()
     {
-
-        
-        render.run();
+        // render.run();
     }
 }

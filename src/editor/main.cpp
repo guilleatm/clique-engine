@@ -10,8 +10,8 @@ int main(int argc, char* argv[])
 	editor.Prepare();
 
 
-	// Entity e = editor.engine.CreateEntity();
-	// e.AddComponent<GameScript>();
+	Entity e = editor.engine.CreateEntity();
+	e.AddComponent<Behaviour>();
 
 	editor.Start();
 
