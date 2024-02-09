@@ -12,8 +12,11 @@ FLECS = -I$(FLECS_DIR) $(FLECS_DIR)/flecs.a
 
 SRC = $(wildcard src/editor/*.cpp) $(wildcard src/engine/*.cpp) $(wildcard src/game/*.cpp)
 
+
+DEBUG = -g
+
 default:
-	g++ $(SRC) -o $(OUTPUT_DIR)$(PROJECT_NAME) -std=c++0x $(SDL) $(IMGUI) $(FLECS) -lSDL2 -lSDL2_image
+	g++ $(SRC) -o $(OUTPUT_DIR)$(PROJECT_NAME) -std=c++0x $(SDL) $(IMGUI) $(FLECS) -lSDL2 -lSDL2_image $(DEBUG)
 
 
 
