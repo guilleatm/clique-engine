@@ -14,26 +14,29 @@
 
 // #include "flecs.h"
 
-class Inspector : public UIWindow
+namespace CliqueEngine
 {
+    class Inspector : public UIWindow
+    {
 
-public:
-    
-    Inspector(UIManager* ui_manager_ptr);
-    void Render() override;
+    public:
+        
+        Inspector(UIManager* ui_manager_ptr);
+        void Render() override;
 
-    void RenderEntity(flecs::entity entity);
-    void RenderComponent(flecs::entity component);
+        void RenderEntity(flecs::entity entity);
+        void RenderComponent(flecs::entity component);
 
-private:
+    private:
 
-    Engine* m_engine;
+        Engine* m_engine_ptr;
 
-    ~Inspector() = default;
+        ~Inspector() = default;
 
-    static int Callback(ImGuiInputTextCallbackData* data);
+        static int Callback(ImGuiInputTextCallbackData* data);
 
 
-};
+    };
 
+}
 #endif // INSPECTOR_H

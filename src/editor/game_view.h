@@ -6,33 +6,36 @@
 
 #include "editor.h"
 
-
-enum GameViewState
-{
-    Stop,
-    Pause,
-    Play
-};
-
-class GameView : public UIWindow
+namespace CliqueEngine
 {
 
-public:
-    GameView(UIManager* ui_manager);
-    ~GameView();
+    enum GameViewState
+    {
+        Stop,
+        Pause,
+        Play
+    };
 
-    void Prepare(SDL_Renderer* renderer_ptr);
+    class GameView : public UIWindow
+    {
 
-    void Render() override;
+    public:
+        GameView(UIManager* ui_manager_ptr);
+        ~GameView();
 
-    
-private:
+        void Prepare(SDL_Renderer* renderer_ptr);
 
-    SDL_Texture* m_texture_ptr;
-    Engine* m_engine;
+        void Render() override;
 
-    GameViewState m_state;
+        
+    private:
 
-};
+        SDL_Texture* m_texture_ptr;
+        Engine* m_engine;
+
+        GameViewState m_state;
+
+    };
+}
 
 #endif // GAME_VIEW_H

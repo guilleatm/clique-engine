@@ -16,37 +16,43 @@
 
 #include "ui_manager.h"
 
-class Editor
+namespace CliqueEngine
 {
 
-public:
-
-    static Editor& Instance()
+    class Editor
     {
-        static Editor instance;
-        return instance;
-    }
 
-    void Prepare();
-    void Start();
+    public:
 
-    // This is a NonCopiableClass
-    Editor(const Editor&) = delete;
-    Editor& operator=(const Editor&) = delete;
+        static Editor& Instance()
+        {
+            static Editor instance;
+            return instance;
+        }
 
-    Engine engine;
-    int64_t inspected_entity_id = -1;
+        void Prepare();
+        void Start();
 
-private:
+        // This is a NonCopiableClass
+        // Editor(const Editor&) = delete;
+        // Editor& operator=(const Editor&) = delete;
 
-    Editor() = default;
-    ~Editor();
+        Engine engine;
+        int64_t inspected_entity_id = -1;
 
-    // SDL
-    SDL_Window* m_window_ptr;
-    SDL_Renderer* m_renderer_ptr;
+    private:
 
-    int InitSDL();
-};
+        Editor();
+        ~Editor();
+
+        RenderManager m_render_manager;
+
+        // SDL
+        // SDL_Window* m_window_ptr;
+        // SDL_Renderer* m_renderer_ptr;
+
+        // int InitSDL();
+    };
+}
 
 #endif // EDITOR_H

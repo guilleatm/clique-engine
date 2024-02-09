@@ -12,28 +12,30 @@
 
 // #include "flecs.h"
 
-
-class Tree : public UIWindow
+namespace CliqueEngine
 {
+    class Tree : public UIWindow
+    {
 
-public:
-    
-    Tree(UIManager* ui_manager_ptr);
-    void Render() override;
+    public:
+        
+        Tree(UIManager* ui_manager_ptr);
+        void Render() override;
 
-    void Render(flecs::entity entity);
+        void Render(flecs::entity entity);
 
-    void HandleClick(int id);
-    void DragDropSource(const int& id);
-    void DragDropTarget(int id);
+        void HandleClick(int id);
+        void DragDropSource(const int& id);
+        void DragDropTarget(int id);
 
 
-private:
+    private:
 
-    Engine* m_engine;
+        Engine* m_engine;
 
-    ~Tree();
+        ~Tree();
 
-};
+    };
+}
 
 #endif // TREE_H

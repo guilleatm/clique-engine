@@ -1,11 +1,13 @@
 #include "sprite.h"
 
-
-Sprite::Sprite()
+namespace CliqueEngine
 {
-}
+    Sprite::Sprite()
+    {
+    }
 
-void Sprite::Render()
-{
-    std::cout << "Rendering sprite" << std::endl;
+    void Sprite::Render()
+    {
+        std::cout << "Rendering sprite" << std::endl;
+    }
 }

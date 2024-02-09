@@ -6,24 +6,28 @@
 #include <string>
 #include <deque>
 
-class InspectorUI : public UIWindow
+namespace CliqueEngine
 {
+    class InspectorUI : public UIWindow
+    {
 
-    const int K_MAX_LOG_ENTRIES = 20;
+        const int K_MAX_LOG_ENTRIES = 20;
 
-public:
-    InspectorUI(UIManager* ui_manager);
-    ~InspectorUI() = default;
+    public:
+        InspectorUI(UIManager* ui_manager);
+        ~InspectorUI() = default;
 
-    void Render() override;
+        void Render() override;
 
-    void Print(std::string message);
-    void Clear();
+        void Print(std::string message);
+        void Clear();
 
-private:
+    private:
 
-    std::deque<std::string> m_entries;
+        std::deque<std::string> m_entries;
 
-};
+    };
+
+}
 
 #endif // INSPECTOR_UI_H

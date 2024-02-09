@@ -7,26 +7,30 @@
 
 class Engine;
 
-class Entity
+namespace CliqueEngine
 {
 
-public:
-    Entity(flecs::entity flecs_entity);
-    ~Entity() = default;
-
-    template <typename T>
-    void AddComponent()
+    class Entity
     {
-        m_flecs_entity.add<T>();
-    }
 
-private:
+    public:
+        Entity(flecs::entity flecs_entity);
+        ~Entity() = default;
+
+        template <typename T>
+        void AddComponent()
+        {
+            m_flecs_entity.add<T>();
+        }
+
+    private:
 
 
-    flecs::entity m_flecs_entity;
-    // Engine* m_engine_ptr;
+        flecs::entity m_flecs_entity;
+        // Engine* m_engine_ptr;
 
 
-};
+    };
+}
 
 #endif // ENTITY_H

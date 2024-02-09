@@ -8,32 +8,52 @@
 
 #include "engine_settings.h"
 
+#include <SDL.h>
+#include <SDL_image.h>
 #include <flecs.h>
+
+#include "render_manager.h"
 
 #include "entity.h"
 
 #include "transform.h"
 
-class Engine
+#include "sprite.h"
+#include "behaviour.h"
+
+namespace CliqueEngine
 {
 
-public:
-    Engine();
-    ~Engine() = default;
+    class Engine
+    {
 
-    void Update();
-    void Render();
+    public:
+        Engine();
+        ~Engine();
 
-    Entity CreateEntity();
+        void Prepare(RenderManager* render_manager_ptr = nullptr);
+        void Start();
 
-    flecs::world world;
+        void Update();
+        void Render();
 
-private:
+        Entity CreateEntity();
 
-    bool m_run;
+        flecs::world world;
 
-    flecs::system update;
+    private:
 
-};
+        RenderManager* m_render_manager_ptr;
+        bool m_render_manager_owner;
 
-#endif // ENGINE_H
+        bool m_run;
+
+        flecs::system update;
+        flecs::system render;
+
+
+        // friend Editor;
+    };
+}
+
+    #endif // ENGINE_H

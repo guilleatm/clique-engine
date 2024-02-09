@@ -3,32 +3,26 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
-#include <iostream>
 #include <SDL.h>
-#include <flecs.h>
-// #include <SDL_image.h>
+#include <SDL_image.h>
+#include "engine.h"
 
-// #include "imgui.h"
-// #include "ui_window.h"
-// #include "error_macros.h"
-
-// #include "console.h"
-
-
-class Sprite
+namespace CliqueEngine
 {
 
-public:
-    Sprite();
-    ~Sprite();
+    struct Sprite
+    {
 
-    void Render();
-    
-private:
+    public:
+        Sprite();
+        void Render();
+        
+    private:
 
-    SDL_Texture* m_texture_ptr;
+        SDL_Texture* m_texture_ptr;
+        ~Sprite() = default;
 
-
-};
+    };
+}
 
 #endif // SPRITE_H

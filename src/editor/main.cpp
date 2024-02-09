@@ -2,34 +2,16 @@
 
 #include "../game/game_script.h"
 
+using namespace CliqueEngine;
+
 int main(int argc, char* argv[])
 {
 	Editor& editor = Editor::Instance();
-	try
-	{
-		editor.Prepare();
-	}
-	catch ( ... )
-	{
-		return -1;
-	}
+	editor.Prepare();
 
 
-
-	Entity e = editor.engine.CreateEntity();
-	e.AddComponent<GameScript>();
-
-	e = editor.engine.CreateEntity();
-	e.AddComponent<GameScript>();
-
-	e = editor.engine.CreateEntity();
-	e.AddComponent<GameScript>();
-
-	e = editor.engine.CreateEntity();
-	e.AddComponent<GameScript>();
-
-	e = editor.engine.CreateEntity();
-	e.AddComponent<GameScript>();
+	// Entity e = editor.engine.CreateEntity();
+	// e.AddComponent<GameScript>();
 
 	editor.Start();
 
