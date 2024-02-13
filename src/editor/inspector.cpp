@@ -5,7 +5,7 @@ namespace CliqueEngine
         
     Inspector::Inspector(UIManager* ui_manager_ptr) : UIWindow(ui_manager_ptr, "Inspector")
     {
-        m_engine_ptr = &my_engine;
+        m_engine_ptr = &Engine::Instance();
 
     }
 
@@ -30,12 +30,12 @@ namespace CliqueEngine
         if (data->EventFlag == ImGuiInputTextFlags_CallbackCompletion)
         {
             Editor* m_editor = &Editor::Instance();
-            my_engine.world.defer_begin();
+            Engine::Instance().world.defer_begin();
 
-            flecs::entity entity = my_engine.world.entity(m_editor->inspected_entity_id);
+            flecs::entity entity = Engine::Instance().world.entity(m_editor->inspected_entity_id);
             entity.set_name(data->Buf);
 
-            my_engine.world.defer_end();        
+            Engine::Instance().world.defer_end();        
         }
         return 0;
     }

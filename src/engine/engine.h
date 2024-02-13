@@ -32,6 +32,12 @@ namespace CliqueEngine
 
     public:
 
+        static Engine& Instance()
+        {
+            static Engine instance;
+            return instance;
+        }
+
         Engine();
         ~Engine();
         
@@ -58,9 +64,6 @@ namespace CliqueEngine
 
         flecs::rule<Behaviour> update_rule;    
     };
-
-    static Engine my_engine;
-
 }
 
 

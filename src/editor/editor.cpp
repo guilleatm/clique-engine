@@ -14,7 +14,7 @@ namespace CliqueEngine
 
 	void Editor::Prepare()
 	{
-		my_engine.Prepare(&m_render_manager);
+		Engine::Instance().Prepare(&m_render_manager);
 	}
 
 

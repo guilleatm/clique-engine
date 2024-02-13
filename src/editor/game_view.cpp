@@ -5,7 +5,7 @@ namespace CliqueEngine
 
     GameView::GameView(UIManager* ui_manager) : UIWindow(ui_manager, "Game View")
     {
-        m_engine = &my_engine;
+        m_engine = &Engine::Instance();
     }
 
     GameView::~GameView()
