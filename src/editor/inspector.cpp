@@ -5,7 +5,7 @@ namespace CliqueEngine
         
     Inspector::Inspector(UIManager* ui_manager_ptr) : UIWindow(ui_manager_ptr, "Inspector")
     {
-        m_engine_ptr = &Editor::Instance().engine;
+        m_engine_ptr = &Editor::Instance().RENAME_ENGINE;
 
     }
 
@@ -30,12 +30,12 @@ namespace CliqueEngine
         if (data->EventFlag == ImGuiInputTextFlags_CallbackCompletion)
         {
             Editor* m_editor = &Editor::Instance();
-            m_editor->engine.world.defer_begin();
+            m_editor->RENAME_ENGINE.world.defer_begin();
 
-            flecs::entity entity = m_editor->engine.world.entity(m_editor->inspected_entity_id);
+            flecs::entity entity = m_editor->RENAME_ENGINE.world.entity(m_editor->inspected_entity_id);
             entity.set_name(data->Buf);
 
-            m_editor->engine.world.defer_end();        
+            m_editor->RENAME_ENGINE.world.defer_end();        
         }
         return 0;
     }
@@ -75,18 +75,85 @@ namespace CliqueEngine
 
     void Inspector::RenderComponent(flecs::entity component)
     {
-        if (ImGui::BeginTabBar("_Component", ImGuiTabBarFlags_None))
+        // if (ImGui::BeginTabBar("_Component", ImGuiTabBarFlags_None))
+        // {
+        //     if (ImGui::BeginTabItem(component.name().c_str()))
+        //     {
+        //         ImGui::EndTabItem();
+        //     }
+        //     // if (ImGui::BeginTabItem("Details"))
+        //     // {
+        //     //     ImGui::Text("ID: 0123456789");
+        //     //     ImGui::EndTabItem();
+        //     // }
+        //     ImGui::EndTabBar();
+        // }
+
+    
+        const char* componentName = component.name().c_str();
+        const flecs::Struct* struct_data = nullptr;
+        
+        if (component.has<flecs::Struct>())
         {
-            if (ImGui::BeginTabItem(component.name().c_str()))
+            struct_data = component.get<flecs::Struct>();
+        }
+
+        const size_t members_size = struct_data ? (size_t) ecs_vec_count(&struct_data->members) : 0;
+        
+        if (ImGui::CollapsingHeader(componentName, nullptr, 0))
+        {
+            if (struct_data)
             {
-                ImGui::EndTabItem();
+                auto members = (ecs_member_t*) ecs_vec_first(&struct_data->members);
+                auto ptr = (uint8_t*) component.get_mut( component.id() );
+                
+                ImGui::PushID(ptr);
+                
+                for (size_t i = 0; i < members_size; ++i)
+                {
+                    if (i > 0)
+                    {
+                        ImGui::Separator();
+                    }
+
+                    ImGui::PushID(i);
+                    const auto& member = members[i];
+                    auto member_type = flecs::entity { m_engine_ptr->world, member.type };
+                    const auto offset = member.offset;
+                    ImGui::Text("%s:", member.name);
+
+                    if (member_type == flecs::F32)
+                    {
+                        auto value = (float*)(ptr + offset);
+                        ImGui::Indent();
+                        ImGui::DragFloat("###value", value, 0.05f);
+                        ImGui::Unindent();
+                    }
+                    else if (member_type == flecs::I32)
+                    {
+                        auto value = (int*)(ptr + offset);
+                        ImGui::Indent();
+                        ImGui::DragInt("###value", value);
+                        ImGui::Unindent();
+                    }
+                    else if (member_type == flecs::Bool)
+                    {
+                        auto value = (bool*)(ptr + offset);
+                        ImGui::Indent();
+                        ImGui::Checkbox("###value", value);
+                        ImGui::Unindent();
+                    }
+
+                    ImGui::PopID();
+                }
+
+                ImGui::PopID();
+                ImGui::Spacing();
             }
-            // if (ImGui::BeginTabItem("Details"))
-            // {
-            //     ImGui::Text("ID: 0123456789");
-            //     ImGui::EndTabItem();
-            // }
-            ImGui::EndTabBar();
+            else
+            {
+                ImGui::Text("No fields serialized");
+            }
         }
     }
 }

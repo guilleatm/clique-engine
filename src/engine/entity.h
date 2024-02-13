@@ -5,7 +5,7 @@
 
 #include <flecs.h>
 
-class Engine;
+// #include "engine.h"
 
 namespace CliqueEngine
 {
@@ -21,6 +21,12 @@ namespace CliqueEngine
         void AddComponent()
         {
             m_flecs_entity.add<T>();
+        }
+
+        template <typename T>
+        const T* GetComponent()
+        {
+            return m_flecs_entity.get<T>();
         }
 
     private:

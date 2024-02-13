@@ -2,10 +2,8 @@
 
 namespace CliqueEngine
 {
-
     Engine::Engine()
     {
-    
     }
 
     Engine::~Engine()
@@ -28,6 +26,16 @@ namespace CliqueEngine
             m_render_manager_ptr = render_manager_ptr;
         }
 
+
+
+        // update_rule = world.rule<Behaviour>();
+
+        // update_rule.each([](flecs::entity e, Behaviour)
+        // {
+        //     std::cout << "Unit " << e.name() << " found\n" << std::endl;
+        // });
+
+
         update = world.system<Behaviour>()
         .kind(flecs::OnUpdate)
         .each([](flecs::entity entity, Behaviour& behaviour)
@@ -43,12 +51,17 @@ namespace CliqueEngine
         // });
     }
 
-    Entity Engine::CreateEntity()
+    Entity Engine::CreateEntity(std::string name)
     {
         flecs::entity flecs_entity = world.entity();
-        std::string entity_name = "entity " + std::to_string(flecs_entity.id());
-        flecs_entity.set_name(entity_name.c_str());
-        flecs_entity.add<Transform>();
+
+        if (name == std::string())
+        {
+            name = "entity " + std::to_string(flecs_entity.id());
+        }
+
+        flecs_entity.set_name(name.c_str());
+        // flecs_entity.add<Transform>();
         return Entity(flecs_entity);
     }
 

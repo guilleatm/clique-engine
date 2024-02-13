@@ -4,19 +4,29 @@
 
 using namespace CliqueEngine;
 
-struct GameScript : public Behaviour
+struct GameScript : Behaviour
 {
 public:
 
-    GameScript() = default;
-    ~GameScript() = default;
-
-    virtual void Update()
+    GameScript()
     {
-        std::cout << "update Game script" << std::endl;
+        // SERIALIZE(GameScript, int32_t, m_int);
+
+        // Editor::Instance().engine.world.component<GameScript>().member<int32_t>("m_int");
     }
 
+    ~GameScript() = default;
 
-private:
+    int32_t m_int = 27;
+
+    virtual void Register() const override
+    {
+        RegisterMember<GameScript, int>("m_int");
+    }
+
+    virtual void Update() override
+    {
+        std::cout << "I am Game Script struct" << std::endl;
+    }
 
 };

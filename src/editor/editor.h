@@ -4,17 +4,13 @@
 #define EDITOR_H
 
 
-#include <SDL.h>
-#include <SDL_image.h>
-
-#include "flecs.h"
-
 #include "../engine/engine.h"
 
 #include "editor_settings.h"
 #include "error_macros.h"
 
 #include "ui_manager.h"
+
 
 namespace CliqueEngine
 {
@@ -37,7 +33,7 @@ namespace CliqueEngine
         // Editor(const Editor&) = delete;
         // Editor& operator=(const Editor&) = delete;
 
-        Engine engine;
+        Engine RENAME_ENGINE;
         int64_t inspected_entity_id = -1;
 
     private:

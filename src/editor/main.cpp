@@ -10,7 +10,16 @@ int main(int argc, char* argv[])
 	editor.Prepare();
 
 
-	Entity e = editor.engine.CreateEntity();
+	editor.RENAME_ENGINE.world.component<GameScript>().is_a<Behaviour>();
+
+	Entity e = editor.RENAME_ENGINE.CreateEntity("Entity with Script");
+	e.AddComponent<GameScript>();
+	e.GetComponent<GameScript>()->Register();
+
+	e = editor.RENAME_ENGINE.CreateEntity("Entity2 with Script");
+	e.AddComponent<GameScript>();
+
+	e = editor.RENAME_ENGINE.CreateEntity("Entity with Behaviour");
 	e.AddComponent<Behaviour>();
 
 	editor.Start();

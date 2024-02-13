@@ -5,24 +5,24 @@
 
 #include "engine.h"
 
-
-struct Behaviour
+namespace CliqueEngine
 {
 
-public:
-
-    Behaviour() = default;
-    ~Behaviour() = default;
-
-    virtual void Update()
+    struct Behaviour : public Component
     {
-        std::cout << m_tick++ << std::endl;
-    }
-    
-private:
 
-    int m_tick = 0;
+    public:
 
-};
+        Behaviour() = default;
+        ~Behaviour() = default;
+
+        virtual void Register() const {}
+        
+        virtual void Update()
+        {
+            std::cout << "I am Behaviour struct" << std::endl;
+        }
+    };
+}
 
 #endif // BEHAVIOUR_H

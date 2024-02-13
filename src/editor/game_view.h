@@ -3,7 +3,6 @@
 #ifndef GAME_VIEW_H
 #define GAME_VIEW_H
 
-
 #include "editor.h"
 
 namespace CliqueEngine

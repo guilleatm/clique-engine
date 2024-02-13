@@ -5,7 +5,7 @@ namespace CliqueEngine
     
     Tree::Tree(UIManager* ui_manager_ptr) : UIWindow(ui_manager_ptr, "Tree")
     {
-        m_engine = &Editor::Instance().engine;
+        m_engine = &Editor::Instance().RENAME_ENGINE;
     }
 
     Tree::~Tree()
