@@ -31,7 +31,7 @@ namespace CliqueEngine
 
     private:
 
-        Engine* m_engine;
+        Engine* m_engine_ptr;
 
         ~Tree();
 

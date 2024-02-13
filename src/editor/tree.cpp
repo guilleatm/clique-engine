@@ -5,7 +5,7 @@ namespace CliqueEngine
     
     Tree::Tree(UIManager* ui_manager_ptr) : UIWindow(ui_manager_ptr, "Tree")
     {
-        m_engine = &Editor::Instance().RENAME_ENGINE;
+        m_engine_ptr = &my_engine;
     }
 
     Tree::~Tree()
@@ -24,7 +24,7 @@ namespace CliqueEngine
 
         const bool is_selected = Editor::Instance().inspected_entity_id == id;
         
-        bool has_children = m_engine->world.count(flecs::ChildOf, entity) != 0;
+        bool has_children = m_engine_ptr->world.count(flecs::ChildOf, entity) != 0;
 
         ImGuiTreeNodeFlags node_flags = ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_OpenOnArrow;
 
@@ -72,7 +72,7 @@ namespace CliqueEngine
 
             if (ImGui::Button("Add Entity"))
             {
-                m_engine->CreateEntity();
+                m_engine_ptr->CreateEntity();
             }
 
             ImGui::SameLine();
@@ -94,16 +94,16 @@ namespace CliqueEngine
                 ImGui::TableHeadersRow();
 
 
-                m_engine->world.defer_begin();
+                m_engine_ptr->world.defer_begin();
 
-                m_engine->world.filter_builder()
+                m_engine_ptr->world.filter_builder()
                 .without(flecs::ChildOf, flecs::Wildcard)
                 .each([this](flecs::entity root_entity)
                 {
                     Render(root_entity);
                 });
 
-                m_engine->world.defer_end();
+                m_engine_ptr->world.defer_end();
 
 
                 ImGui::EndTable();
@@ -142,8 +142,8 @@ namespace CliqueEngine
             {
                 int source_id = *(const int*) payload->Data;
             
-                flecs::entity entity = m_engine->world.entity(source_id);
-                flecs::entity new_parent = m_engine->world.entity(target_id);
+                flecs::entity entity = m_engine_ptr->world.entity(source_id);
+                flecs::entity new_parent = m_engine_ptr->world.entity(target_id);
 
                 entity.child_of(new_parent);
             }

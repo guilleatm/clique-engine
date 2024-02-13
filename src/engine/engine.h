@@ -59,7 +59,7 @@ namespace CliqueEngine
         flecs::rule<Behaviour> update_rule;    
     };
 
-    static Engine engine;
+    static Engine my_engine;
 
 }
 

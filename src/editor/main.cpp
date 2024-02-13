@@ -6,20 +6,23 @@ using namespace CliqueEngine;
 
 int main(int argc, char* argv[])
 {
+
+	int a = 0;
+
 	Editor& editor = Editor::Instance();
 	editor.Prepare();
 
 
-	editor.RENAME_ENGINE.world.component<GameScript>().is_a<Behaviour>();
+	my_engine.world.component<GameScript>().is_a<Behaviour>();
 
-	Entity e = editor.RENAME_ENGINE.CreateEntity("Entity with Script");
+	Entity e = my_engine.CreateEntity("Entity with Script");
 	e.AddComponent<GameScript>();
 	e.GetComponent<GameScript>()->Register();
 
-	e = editor.RENAME_ENGINE.CreateEntity("Entity2 with Script");
+	e = my_engine.CreateEntity("Entity2 with Script");
 	e.AddComponent<GameScript>();
 
-	e = editor.RENAME_ENGINE.CreateEntity("Entity with Behaviour");
+	e = my_engine.CreateEntity("Entity with Behaviour");
 	e.AddComponent<Behaviour>();
 
 	editor.Start();

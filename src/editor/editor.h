@@ -14,6 +14,7 @@
 
 namespace CliqueEngine
 {
+    static int DELETE = 8;
 
     class Editor
     {
@@ -33,7 +34,7 @@ namespace CliqueEngine
         // Editor(const Editor&) = delete;
         // Editor& operator=(const Editor&) = delete;
 
-        Engine RENAME_ENGINE;
+        // Engine RENAME_ENGINE;
         int64_t inspected_entity_id = -1;
 
     private:
