@@ -25,7 +25,7 @@ namespace CliqueEngine
         virtual void Render() override;
 
         void RenderEntity(flecs::entity entity);
-        void RenderComponent(flecs::entity component);
+        void RenderComponent(flecs::entity entity, flecs::entity component);
 
     private:
 

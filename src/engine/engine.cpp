@@ -4,28 +4,27 @@ namespace CliqueEngine
 {
     Engine::Engine()
     {
+        // Creates RenderManager
+        // Creates flecs::world
     }
 
     Engine::~Engine()
     {
-        if (m_render_manager_owner)
-        {
-            delete m_render_manager_ptr;
-        }
     }
 
-    void Engine::Prepare(RenderManager* render_manager_ptr)
+    void Engine::Prepare()
     {
-        m_render_manager_owner = render_manager_ptr == nullptr;
-        if (m_render_manager_owner)
-        {
-            m_render_manager_ptr = new RenderManager();
-        }
-        else
-        {
-            m_render_manager_ptr = render_manager_ptr;
-        }
+        // render_manager = RenderManager();
 
+        // m_render_manager_owner = render_manager_ptr_or_nullptr == nullptr;
+        // if (m_render_manager_owner)
+        // {
+        //     render_manager_ptr = new RenderManager();
+        // }
+        // else
+        // {
+        //     render_manager_ptr = render_manager_ptr_or_nullptr;
+        // }
 
 
         // update_rule = world.rule<Behaviour>();
@@ -43,12 +42,12 @@ namespace CliqueEngine
             behaviour.Update();
         });
 
-        // render = world.system<Sprite>()
-        // .kind(flecs::PostUpdate)
-        // .each([](flecs::entity entity, const Sprite& sprite)
-        // {
-        //     // sprite.Render();
-        // });
+        render = world.system<Sprite>()
+        .kind(flecs::PostUpdate)
+        .each([](flecs::entity entity, const Sprite& sprite)
+        {
+            sprite.Render();
+        });
     }
 
     Entity Engine::CreateEntity(std::string name)
@@ -68,7 +67,7 @@ namespace CliqueEngine
 
     void Engine::Start()
     {
-        
+        // my loop
     }
 
     void Engine::Update()
@@ -78,6 +77,6 @@ namespace CliqueEngine
 
     void Engine::Render()
     {
-        // render.run();
+        render.run();
     }
 }

@@ -9,11 +9,17 @@
 #include "editor_settings.h"
 #include "error_macros.h"
 
+
+#include "editor_render_manager.h"
+
 #include "ui_manager.h"
 
 
 namespace CliqueEngine
 {
+
+    class EditorRenderManager;
+
     class Editor
     {
 
@@ -39,7 +45,7 @@ namespace CliqueEngine
         Editor();
         ~Editor();
 
-        RenderManager m_render_manager;
+        EditorRenderManager m_editor_render_manager;
 
         // SDL
         // SDL_Window* m_window_ptr;

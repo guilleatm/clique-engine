@@ -3,12 +3,13 @@
 #ifndef BEHAVIOUR_H
 #define BEHAVIOUR_H
 
-#include "engine.h"
-
 namespace CliqueEngine
 {
 
-    struct Behaviour : public Component
+    #define REGISTER(class, type, var) Engine::Instance().world.component<class>().member<type>(#var)
+
+
+    struct Behaviour
     {
 
     public:

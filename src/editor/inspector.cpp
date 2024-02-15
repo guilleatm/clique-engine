@@ -53,14 +53,14 @@ namespace CliqueEngine
 
         m_engine_ptr->world.defer_begin();
 
-        entity.each([this](flecs::id id)
+        entity.each([this, entity](flecs::id id)
         {
             // auto component = m_engine->world.component(component_id);
             // const char* component_name = component.name().c_str();
 
             if (id.is_entity())
             {
-                RenderComponent(m_engine_ptr->world.entity(id));
+                RenderComponent(entity, id.entity());
                 // flecs::entity c = m_engine->world.entity(id);
                 // c.add<int>();
                 // int p = c.get<int>();
@@ -73,7 +73,7 @@ namespace CliqueEngine
 
     }
 
-    void Inspector::RenderComponent(flecs::entity component)
+    void Inspector::RenderComponent(flecs::entity entity, flecs::entity component)
     {
         // if (ImGui::BeginTabBar("_Component", ImGuiTabBarFlags_None))
         // {
@@ -105,7 +105,7 @@ namespace CliqueEngine
             if (struct_data)
             {
                 auto members = (ecs_member_t*) ecs_vec_first(&struct_data->members);
-                auto ptr = (uint8_t*) component.get_mut( component.id() );
+                auto ptr = (uint8_t*) entity.get_mut( component.raw_id() );
                 
                 ImGui::PushID(ptr);
                 
@@ -143,6 +143,13 @@ namespace CliqueEngine
                         ImGui::Checkbox("###value", value);
                         ImGui::Unindent();
                     }
+                    else if (member_type == flecs::String)
+                    {
+                        auto value = (char*)(ptr + offset);
+                        ImGui::Indent();
+                        ImGui::Text("###value", value);
+                        ImGui::Unindent();
+                    }
 
                     ImGui::PopID();
                 }
@@ -152,7 +159,9 @@ namespace CliqueEngine
             }
             else
             {
+                ImGui::Indent();
                 ImGui::Text("No fields serialized");
+                ImGui::Unindent();
             }
         }
     }

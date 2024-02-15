@@ -1,5 +1,9 @@
 #include "game_view.h"
 
+#include "../engine/engine.h"
+#include <SDL.h>
+#include "console.h"
+
 namespace CliqueEngine
 {
 
@@ -18,10 +22,6 @@ namespace CliqueEngine
         SDL_Surface* surface_ptr = IMG_Load("assets/frog_square.png");
         m_texture_ptr = SDL_CreateTextureFromSurface(renderer_ptr, surface_ptr);
         SDL_FreeSurface(surface_ptr);
-
-        ERROR_IF(m_texture_ptr == nullptr);
-
-        std::cout << m_texture_ptr << std::endl;
     }
 
     void GameView::Render()

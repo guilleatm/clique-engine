@@ -1,11 +1,14 @@
 #include "editor.h"
 
+#include "editor_render_manager.h"
+
 namespace CliqueEngine
 {
 	const float K_TARGET_EDITOR_DELTA_TIME = 1000.0f / K_EDITOR_TARGET_FRAMERATE;
 
-	Editor::Editor()
+	Editor::Editor() : m_editor_render_manager(&Engine::Instance().render_manager)
 	{
+
 	}
 
 	Editor::~Editor()
@@ -14,13 +17,13 @@ namespace CliqueEngine
 
 	void Editor::Prepare()
 	{
-		Engine::Instance().Prepare(&m_render_manager);
+
 	}
 
 
 	void Editor::Start()
 	{
-		UIManager ui_manager = UIManager(m_render_manager.window_ptr, m_render_manager.renderer_ptr);
+		UIManager ui_manager = UIManager(m_editor_render_manager.window_ptr, m_editor_render_manager.renderer_ptr);
 
 		bool run = true;
 
@@ -49,12 +52,12 @@ namespace CliqueEngine
 				}
 			}
 
-			SDL_SetRenderDrawColor(m_render_manager.renderer_ptr, 120, 180, 255, 255);
-			SDL_RenderClear(m_render_manager.renderer_ptr);
+			SDL_SetRenderDrawColor(m_editor_render_manager.renderer_ptr, 120, 180, 255, 255); // ALL FRAMES?
+			SDL_RenderClear(m_editor_render_manager.renderer_ptr);
 
 			ui_manager.Render();
 
-			SDL_RenderPresent(m_render_manager.renderer_ptr);
+			SDL_RenderPresent(m_editor_render_manager.renderer_ptr);
 		}
 	}
 

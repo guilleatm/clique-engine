@@ -3,10 +3,15 @@
 #ifndef GAME_VIEW_H
 #define GAME_VIEW_H
 
-#include "editor.h"
+#include "ui_window.h"
+
+class SDL_Renderer;
+class SDL_Texture;
 
 namespace CliqueEngine
 {
+    class Engine;
+    class UIManager;
 
     enum GameViewState
     {

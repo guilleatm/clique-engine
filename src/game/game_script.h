@@ -1,27 +1,30 @@
 #pragma once
 
-#include "../engine/engine.h"
+// #include "../engine/engine.h"
+
+#include "../engine/behaviour.h"
 
 using namespace CliqueEngine;
 
-struct GameScript : Behaviour
+struct GameScript : public Behaviour
 {
 public:
 
-    GameScript()
-    {
-        // SERIALIZE(GameScript, int32_t, m_int);
-
-        // Editor::Instance().engine.world.component<GameScript>().member<int32_t>("m_int");
-    }
-
+    GameScript() = default;
     ~GameScript() = default;
 
-    int32_t m_int = 27;
+    int bullets = 17;
+    bool player_alive = false;
+    float speed = 543.6;
+    const char* m_char = "aaaaaaa";
 
     virtual void Register() const override
     {
-        RegisterMember<GameScript, int>("m_int");
+        REGISTER(GameScript, int, bullets);
+        REGISTER(GameScript, float, speed);
+        REGISTER(GameScript, bool, player_alive);
+        REGISTER(GameScript, const char*, m_char);
+
     }
 
     virtual void Update() override
