@@ -37,8 +37,6 @@ namespace CliqueEngine
             return instance;
         }
 
-        
-        void Prepare();
         void Start();
 
         void Update();

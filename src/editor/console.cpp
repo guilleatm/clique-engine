@@ -1,5 +1,8 @@
 #include "console.h"
 
+#include "ui_manager.h"
+#include "editor_settings.h"
+
 namespace CliqueEngine
 {
 
@@ -55,7 +58,7 @@ namespace CliqueEngine
     void Console::Print(const char* fmt, ...) //IM_FMTARGS(2)
     {
 
-        std::cout << "Console: " << fmt << std::endl;
+        // std::cout << "Console: " << fmt << std::endl;
         // FIXME-OPT
         char buf[1024];
         va_list args;

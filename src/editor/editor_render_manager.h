@@ -10,6 +10,7 @@ struct SDL_Window;
 namespace CliqueEngine
 {
     class RenderManager;
+    class UIManager;
 
     class EditorRenderManager
     {
@@ -24,9 +25,10 @@ namespace CliqueEngine
 
         SDL_Texture* target_texture_ptr;
 
+        void Render(UIManager& ui_manager);
+
     private:
 
-        // We dont need to store but just in case
         RenderManager* m_render_manager_ptr;
     };
 }

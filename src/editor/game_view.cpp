@@ -1,7 +1,9 @@
 #include "game_view.h"
 
+#include "editor.h"
 #include "../engine/engine.h"
 #include <SDL.h>
+#include <SDL_image.h>
 #include "console.h"
 
 namespace CliqueEngine
@@ -14,14 +16,14 @@ namespace CliqueEngine
 
     GameView::~GameView()
     {
-        SDL_DestroyTexture(m_texture_ptr);
+        // SDL_DestroyTexture(m_texture_ptr);
     }
 
     void GameView::Prepare(SDL_Renderer* renderer_ptr)
     {
-        SDL_Surface* surface_ptr = IMG_Load("assets/frog_square.png");
-        m_texture_ptr = SDL_CreateTextureFromSurface(renderer_ptr, surface_ptr);
-        SDL_FreeSurface(surface_ptr);
+        // SDL_Surface* surface_ptr = IMG_Load("assets/frog_square.png");
+        // m_texture_ptr = SDL_CreateTextureFromSurface(renderer_ptr, surface_ptr);
+        // SDL_FreeSurface(surface_ptr);
     }
 
     void GameView::Render()
@@ -70,7 +72,7 @@ namespace CliqueEngine
 
             //ImVec2 windowSize = ImGui::GetWindowSize();
             ImVec2 size = ImVec2(200, 200);
-            ImGui::Image((ImTextureID) m_texture_ptr, size);
+            ImGui::Image((ImTextureID) Editor::Instance().m_editor_render_manager.target_texture_ptr, size);
 
         }
 

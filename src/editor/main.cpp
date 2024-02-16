@@ -8,8 +8,6 @@ int main(int argc, char* argv[])
 {
 	Engine& engine = Engine::Instance();
 	Editor& editor = Editor::Instance();
-
-	editor.Prepare();
 	
 	engine.world.component<GameScript>().is_a<Behaviour>();
 
@@ -17,7 +15,8 @@ int main(int argc, char* argv[])
 	// e.AddComponent<GameScript>();
 	// e.GetComponent<GameScript>()->Register();
 
-	e.AddComponent<Sprite>();
+	// e.AddComponent<Behaviour>();
+	// e.AddComponent<Sprite>();
 
 
 	editor.Start();

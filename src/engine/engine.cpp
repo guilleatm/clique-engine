@@ -6,33 +6,6 @@ namespace CliqueEngine
     {
         // Creates RenderManager
         // Creates flecs::world
-    }
-
-    Engine::~Engine()
-    {
-    }
-
-    void Engine::Prepare()
-    {
-        // render_manager = RenderManager();
-
-        // m_render_manager_owner = render_manager_ptr_or_nullptr == nullptr;
-        // if (m_render_manager_owner)
-        // {
-        //     render_manager_ptr = new RenderManager();
-        // }
-        // else
-        // {
-        //     render_manager_ptr = render_manager_ptr_or_nullptr;
-        // }
-
-
-        // update_rule = world.rule<Behaviour>();
-
-        // update_rule.each([](flecs::entity e, Behaviour)
-        // {
-        //     std::cout << "Unit " << e.name() << " found\n" << std::endl;
-        // });
 
 
         update = world.system<Behaviour>()
@@ -48,6 +21,17 @@ namespace CliqueEngine
         {
             sprite.Render();
         });
+
+        // update_rule = world.rule<Behaviour>();
+
+        // update_rule.each([](flecs::entity e, Behaviour)
+        // {
+        //     std::cout << "Unit " << e.name() << " found\n" << std::endl;
+        // });
+    }
+
+    Engine::~Engine()
+    {
     }
 
     Entity Engine::CreateEntity(std::string name)
@@ -72,11 +56,11 @@ namespace CliqueEngine
 
     void Engine::Update()
     {
-        update.run();
+        // update.run();
     }
 
     void Engine::Render()
     {
-        render.run();
+        // render.run();
     }
 }

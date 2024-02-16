@@ -1,5 +1,6 @@
 #include "editor.h"
 
+#include "SDL.h"
 #include "editor_render_manager.h"
 
 namespace CliqueEngine
@@ -15,14 +16,9 @@ namespace CliqueEngine
 	{
 	}
 
-	void Editor::Prepare()
-	{
-
-	}
-
-
 	void Editor::Start()
 	{
+		// TO CONSTUCTOR
 		UIManager ui_manager = UIManager(m_editor_render_manager.window_ptr, m_editor_render_manager.renderer_ptr);
 
 		bool run = true;
@@ -52,12 +48,7 @@ namespace CliqueEngine
 				}
 			}
 
-			SDL_SetRenderDrawColor(m_editor_render_manager.renderer_ptr, 120, 180, 255, 255); // ALL FRAMES?
-			SDL_RenderClear(m_editor_render_manager.renderer_ptr);
-
-			ui_manager.Render();
-
-			SDL_RenderPresent(m_editor_render_manager.renderer_ptr);
+			m_editor_render_manager.Render(ui_manager);
 		}
 	}
 

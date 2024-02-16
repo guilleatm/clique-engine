@@ -1,5 +1,8 @@
 #include "render_manager.h"
 
+#include <SDL.h>
+#include <SDL_image.h> // DELETE
+
 namespace CliqueEngine
 {
 
@@ -52,4 +55,18 @@ namespace CliqueEngine
 
 		return 0;
 	}
+
+
+	void RenderManager::Render()
+	{
+		SDL_RenderClear(renderer_ptr);
+
+		SDL_Surface* surface_ptr = IMG_Load("build/assets/frog_square.png");
+		SDL_Texture* t = SDL_CreateTextureFromSurface(renderer_ptr, surface_ptr);
+        SDL_FreeSurface(surface_ptr);
+
+		const SDL_Rect r = SDL_Rect({0, 0, 100, 100});
+        SDL_RenderCopy(renderer_ptr, t, NULL, &r);
+
+    }
 }

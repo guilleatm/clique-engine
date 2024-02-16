@@ -1,10 +1,13 @@
 #ifndef CONSOLE_H
 #define CONSOLE_H
 
-#include "ui_manager.h"
+#include "imgui.h" // DELETE
+#include "ui_window.h"
 
 namespace CliqueEngine
 {
+
+    class UIManager;
 
     class Console : public UIWindow
     {

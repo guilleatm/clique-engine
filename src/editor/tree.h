@@ -3,17 +3,22 @@
 #ifndef TREE_H
 #define TREE_H
 
-#include "editor.h"
+#include "ui_window.h"
 
 // #include "editor.h"
 // #include "ui_manager.h"
 // #include "ui_window.h"
 // #include "console.h"
 
-// #include "flecs.h"
+#include "flecs.h"
+
 
 namespace CliqueEngine
 {
+
+    class Engine;
+    class UIManager;
+
     class Tree : public UIWindow
     {
 

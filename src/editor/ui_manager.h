@@ -3,26 +3,30 @@
 #ifndef UI_MANAGER_H
 #define UI_MANAGER_H
 
-
 #include <unordered_map>
 #include <queue>
+#include <string>
 
-#include "imgui.h"
-#include "imgui_impl_sdl2.h"
-#include "imgui_impl_sdlrenderer2.h"
-#include "ui_window.h"
+// #include "imgui.h"
+// #include "imgui_impl_sdl2.h"
+// #include "imgui_impl_sdlrenderer2.h"
+// #include "ui_window.h"
 
 
 // This going to Editor
-#include "console.h"
-#include "game_view.h"
-#include "tree.h"
-#include "inspector.h"
+// #include "console.h"
+// #include "game_view.h"
+// #include "tree.h"
+// #include "inspector.h"
+
+struct SDL_Window;
+struct SDL_Renderer;
+union SDL_Event;
 
 namespace CliqueEngine
 {
     class UIWindow;
-    
+
     class UIManager
     {
     public:
@@ -60,7 +64,7 @@ namespace CliqueEngine
             }
             return false;
         }
-        
+
     private:
 
         bool m_show_demo_window = false;

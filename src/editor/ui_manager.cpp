@@ -1,8 +1,29 @@
 #include "ui_manager.h"
 
+#include "imgui.h"
+
+#include "imgui_impl_sdl2.h"
+#include "imgui_impl_sdlrenderer2.h"
+
+#include "editor_settings.h"
+#include "error_macros.h"
+
+#include "ui_window.h"
+
+#include "console.h"
+#include "game_view.h"
+#include "tree.h"
+#include "inspector.h"
+
 namespace CliqueEngine
 {
     const int K_DEFAULT_WINDOW_COUNT = 5;
+
+
+    class Console;
+    class Tree;
+    class GameView;
+    class Inspector;
 
     UIManager::UIManager(SDL_Window* window_ptr, SDL_Renderer* renderer_ptr)
     {
@@ -115,7 +136,7 @@ namespace CliqueEngine
         ImGui::SetNextWindowPos(use_work_area ? viewport->WorkPos : viewport->Pos);
         ImGui::SetNextWindowSize(use_work_area ? viewport->WorkSize : viewport->Size);
 
-        ImGui::Begin("_Main", NULL, flags);
+        ImGui::Begin("###Main", NULL, flags);
 
         for (auto it = m_windows.begin(); it != m_windows.end(); it++)
         {

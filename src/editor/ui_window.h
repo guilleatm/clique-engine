@@ -3,8 +3,6 @@
 #ifndef UI_WINDOW_H
 #define UI_WINDOW_H
 
-#include "imgui.h"
-
 namespace CliqueEngine
 {
     class UIManager;

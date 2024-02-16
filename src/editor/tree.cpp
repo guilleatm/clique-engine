@@ -1,5 +1,9 @@
 #include "tree.h"
 
+#include "imgui.h"
+#include "../engine/engine.h"
+#include "editor.h"
+
 namespace CliqueEngine
 {
     

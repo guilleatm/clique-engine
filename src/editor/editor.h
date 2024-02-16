@@ -19,6 +19,7 @@ namespace CliqueEngine
 {
 
     class EditorRenderManager;
+    class GameView;
 
     class Editor
     {
@@ -31,7 +32,6 @@ namespace CliqueEngine
             return instance;
         }
 
-        void Prepare();
         void Start();
 
         // This is a NonCopiableClass
@@ -52,6 +52,8 @@ namespace CliqueEngine
         // SDL_Renderer* m_renderer_ptr;
 
         // int InitSDL();
+
+        friend GameView;
     };
 }
 

@@ -1,5 +1,12 @@
 #include "inspector.h"
 
+#include <cstring>
+
+#include "imgui.h"
+
+#include "../engine/engine.h"
+#include "editor.h"
+
 namespace CliqueEngine
 {
         

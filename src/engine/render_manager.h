@@ -3,6 +3,9 @@
 #ifndef RENDER_MANAGER_H
 #define RENDER_MANAGER_H
 
+struct SDL_Renderer;
+struct SDL_Window;
+
 namespace CliqueEngine
 {
     class RenderManager
@@ -15,6 +18,8 @@ namespace CliqueEngine
 
         SDL_Renderer* renderer_ptr;
         SDL_Window* window_ptr;
+
+        void Render();
 
     private:
 
