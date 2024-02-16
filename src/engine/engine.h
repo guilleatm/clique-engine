@@ -54,8 +54,19 @@ namespace CliqueEngine
 
         bool m_run;
 
-        flecs::system update;
-        flecs::system render;
+        flecs::system m_update_system = world.system<Behaviour>("update_system")
+        .kind(flecs::OnUpdate)
+        .each([](flecs::entity entity, Behaviour& behaviour)
+        {
+            behaviour.Update();
+        });
+
+        flecs::system m_render_system = world.system<Sprite>("render_system")
+        .kind(flecs::PostUpdate)
+        .each([](flecs::entity entity, const Sprite& sprite)
+        {
+            sprite.Render();
+        });
 
         flecs::rule<Behaviour> update_rule;
     };

@@ -3,14 +3,15 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include <flecs.h>
+#include "flecs.h"
 
 // #include "engine.h"
 
 namespace CliqueEngine
 {
+    struct Component;
 
-    class Entity
+    struct Entity
     {
 
     public:
@@ -34,7 +35,6 @@ namespace CliqueEngine
 
         flecs::entity m_flecs_entity;
         // Engine* m_engine_ptr;
-
 
     };
 }

@@ -9,9 +9,9 @@ int main(int argc, char* argv[])
 	Engine& engine = Engine::Instance();
 	Editor& editor = Editor::Instance();
 	
-	engine.world.component<GameScript>().is_a<Behaviour>();
+	// engine.world.component<GameScript>().is_a<Behaviour>();
 
-	Entity e = Engine::Instance().CreateEntity("Entity with Script");
+	Entity e = Engine::Instance().CreateEntity("Frog");
 	// e.AddComponent<GameScript>();
 	// e.GetComponent<GameScript>()->Register();
 

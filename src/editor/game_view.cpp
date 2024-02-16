@@ -61,7 +61,7 @@ namespace CliqueEngine
                 // No break
 
             case GameViewState::Pause:
-                m_engine->Render();
+                // m_engine->Render();
                 break;
             
             case GameViewState::Stop:

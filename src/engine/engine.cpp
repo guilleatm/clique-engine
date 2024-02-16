@@ -2,24 +2,9 @@
 
 namespace CliqueEngine
 {
-    Engine::Engine()
+    Engine::Engine() : render_manager(m_render_system)
     {
-        // Creates RenderManager
         // Creates flecs::world
-
-        update = world.system<Behaviour>()
-        .kind(flecs::OnUpdate)
-        .each([](flecs::entity entity, Behaviour& behaviour)
-        {
-            behaviour.Update();
-        });
-
-        render = world.system<Sprite>()
-        .kind(flecs::PostUpdate)
-        .each([](flecs::entity entity, const Sprite& sprite)
-        {
-            sprite.Render();
-        });
 
         // update_rule = world.rule<Behaviour>();
 
@@ -55,11 +40,11 @@ namespace CliqueEngine
 
     void Engine::Update()
     {
-        update.run();
+        m_update_system.run();
     }
 
     void Engine::Render()
     {
-        render.run();
+        render_manager.Render();
     }
 }

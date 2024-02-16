@@ -22,7 +22,6 @@ namespace CliqueEngine
 
     void Sprite::Render() const
     {
-        std::cout << "rendering" << std::endl;
         const SDL_Rect r = SDL_Rect({0, 0, 100, 100});
         SDL_RenderCopy(m_renderer_ptr, m_texture_ptr, NULL, &r);
     }

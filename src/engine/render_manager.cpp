@@ -1,12 +1,11 @@
 #include "render_manager.h"
 
 #include <SDL.h>
-#include <SDL_image.h> // DELETE
-
+#include "flecs.h"
 namespace CliqueEngine
 {
 
-	RenderManager::RenderManager()
+	RenderManager::RenderManager(const flecs::system& render_system) : m_render_system(render_system)
 	{
 		if (InitSDL() < 0)
 		{
@@ -59,6 +58,8 @@ namespace CliqueEngine
 
 	void RenderManager::Render()
 	{
-		// SDL_RenderClear(renderer_ptr);
-    }
+		SDL_RenderClear(renderer_ptr);
+    
+		m_render_system.run();
+	}
 }

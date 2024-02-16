@@ -2,8 +2,7 @@
 
 namespace CliqueEngine
 {
-    Entity::Entity(flecs::entity flecs_entity)
+    Entity::Entity(flecs::entity flecs_entity) : m_flecs_entity(flecs_entity)
     {
-        m_flecs_entity = flecs_entity;
     }
 }
