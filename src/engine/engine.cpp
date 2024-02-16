@@ -7,7 +7,6 @@ namespace CliqueEngine
         // Creates RenderManager
         // Creates flecs::world
 
-
         update = world.system<Behaviour>()
         .kind(flecs::OnUpdate)
         .each([](flecs::entity entity, Behaviour& behaviour)
@@ -51,16 +50,16 @@ namespace CliqueEngine
 
     void Engine::Start()
     {
-        // my loop
+        // engine loop
     }
 
     void Engine::Update()
     {
-        // update.run();
+        update.run();
     }
 
     void Engine::Render()
     {
-        // render.run();
+        render.run();
     }
 }

@@ -2,6 +2,7 @@
 
 #include <SDL.h>
 #include "ui_manager.h"
+#include "../engine/engine.h"
 #include "../engine/render_manager.h"
 
 namespace CliqueEngine
@@ -35,7 +36,7 @@ namespace CliqueEngine
 
         SDL_SetRenderTarget(renderer_ptr, target_texture_ptr);
 
-        m_render_manager_ptr->Render();
+        Engine::Instance().Render();
 
         SDL_SetRenderTarget(renderer_ptr, NULL);
 

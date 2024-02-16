@@ -15,8 +15,8 @@ int main(int argc, char* argv[])
 	// e.AddComponent<GameScript>();
 	// e.GetComponent<GameScript>()->Register();
 
-	// e.AddComponent<Behaviour>();
-	// e.AddComponent<Sprite>();
+	e.AddComponent<Behaviour>();
+	e.AddComponent<Sprite>();
 
 
 	editor.Start();
