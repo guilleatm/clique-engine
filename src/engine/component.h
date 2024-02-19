@@ -4,20 +4,28 @@
 #define COMPONENT_H
 
 #include "flecs.h"
+#include "entity.h"
 
 namespace CliqueEngine
 {
+    // struct Entity;
+
     struct Component
     {
 
     public:
-        Component(flecs::entity flecs_entity, flecs::entity flecs_component);
+        Component();
         ~Component() = default;
+
+        // Entity entity;
 
     private:
 
-        flecs::entity m_flecs_entity;
         flecs::entity m_flecs_component;
+    
+        void Prepare(flecs::entity flecs_component);
+
+        friend Entity;
     };
 }
 

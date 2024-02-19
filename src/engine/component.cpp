@@ -1,11 +1,19 @@
 #include "component.h"
 
+#include <iostream> //DELETE
+
 namespace CliqueEngine
 {
-    Component::Component(flecs::entity flecs_entity, flecs::entity flecs_component) :
-        m_flecs_entity(flecs_entity),
-        m_flecs_component(flecs_component)
+    Component::Component()
     {
-        
+    }
+
+    void Component::Prepare(flecs::entity flecs_component)
+    {
+        m_flecs_component = flecs_component;
+
+        bool r = m_flecs_component.has_relation(flecs::Entity);
+
+        std::cout << r << std::endl;
     }
 }

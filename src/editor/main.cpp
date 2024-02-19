@@ -2,6 +2,8 @@
 
 #include "../game/game_script.h"
 
+#include "../engine/position.h" // DELETE
+
 using namespace CliqueEngine;
 
 int main(int argc, char* argv[])
@@ -15,8 +17,12 @@ int main(int argc, char* argv[])
 	// e.AddComponent<GameScript>();
 	// e.GetComponent<GameScript>()->Register();
 
-	e.AddComponent<Behaviour>();
-	e.AddComponent<Sprite>();
+	// e.AddComponent<Behaviour>();
+	// Sprite& s = e.AddComponent<Sprite>();
+	Position* pos = e.AddComponent<Position>();
+
+	std::cout << pos->x << std::endl;
+	std::cout << pos->y << std::endl;
 
 
 	editor.Start();

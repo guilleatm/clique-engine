@@ -6,20 +6,21 @@
 // #include <SDL.h>
 // #include <SDL_image.h>
 // #include "engine.h"
+#include "component.h"
 
 struct SDL_Texture;
 struct SDL_Renderer;
 
 namespace CliqueEngine
 {
-    struct Sprite
+    struct Sprite : public Component
     {
 
     public:
         Sprite();
         ~Sprite();
 
-        void Render() const;
+        void Render();
         
     private:
 

@@ -16,7 +16,6 @@
 
 #include "entity.h"
 
-#include "transform.h"
 #include "sprite.h"
 #include "behaviour.h"
 
@@ -63,7 +62,7 @@ namespace CliqueEngine
 
         flecs::system m_render_system = world.system<Sprite>("render_system")
         .kind(flecs::PostUpdate)
-        .each([](flecs::entity entity, const Sprite& sprite)
+        .each([](flecs::entity entity, Sprite& sprite)
         {
             sprite.Render();
         });

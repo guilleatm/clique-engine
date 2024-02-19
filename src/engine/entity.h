@@ -19,15 +19,16 @@ namespace CliqueEngine
         ~Entity() = default;
 
         template <typename T>
-        void AddComponent()
+        T* AddComponent()
         {
             m_flecs_entity.add<T>();
+            return GetComponent<T>();
         }
 
         template <typename T>
-        const T* GetComponent()
+        T* GetComponent() const
         {
-            return m_flecs_entity.get<T>();
+            return m_flecs_entity.get_mut<T>();
         }
 
     private:

@@ -3,10 +3,11 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include "engine.h"
+#include "position.h"
 
 namespace CliqueEngine
 {
-    Sprite::Sprite()
+    Sprite::Sprite() : Component()
     {
         m_renderer_ptr = Engine::Instance().render_manager.renderer_ptr;
 
@@ -20,8 +21,13 @@ namespace CliqueEngine
         SDL_DestroyTexture(m_texture_ptr);
     }
 
-    void Sprite::Render() const
+    void Sprite::Render()
     {
+
+        // Position* pos = entity.GetComponent<Position>();
+
+        // std::cout << pos->x << " " << pos->y << std::endl;
+
         const SDL_Rect r = SDL_Rect({0, 0, 100, 100});
         SDL_RenderCopy(m_renderer_ptr, m_texture_ptr, NULL, &r);
     }

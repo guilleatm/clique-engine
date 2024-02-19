@@ -3,16 +3,21 @@
 #ifndef POSITION_H
 #define POSITION_H
 
-struct Position
+#include "component.h"
+
+namespace CliqueEngine
 {
-    
-public:
-    int x;
-    int y;
+    struct Position : Component
+    {
+        
+    public:
+        int x = 12;
+        int y = 10;
 
-private:
+    private:
 
 
-};
+    };
+}
 
 #endif // POSITION_H
